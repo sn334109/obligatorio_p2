@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Articulo
     {
+        static int ultimoId;
         int id;
         string nombre;
         string categoria;
@@ -20,9 +21,9 @@ namespace Dominio
 
         public Articulo() { }
 
-        public Articulo(int id, string nombre, string categoria, int precioVenta)
+        public Articulo(string nombre, string categoria, int precioVenta)
         {
-            this.Id = id;
+            this.Id = ++ultimoId;
             this.Nombre = nombre;
             this.Categoria = categoria;
             this.PrecioVenta = precioVenta;

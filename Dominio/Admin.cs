@@ -8,7 +8,7 @@ namespace Dominio
 {
     public class Admin: Usuario
     {
-        public Admin(int id, string nombre, string apellido, string email, string clave, decimal saldoDisponible) : base(id, nombre, apellido, email, clave) 
+        public Admin(string nombre, string apellido, string email, string clave) : base(nombre, apellido, email, clave) 
         { 
         
         }

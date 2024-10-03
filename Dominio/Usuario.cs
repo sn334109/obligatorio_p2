@@ -4,6 +4,7 @@ namespace Dominio
 {
     public class Usuario
     {
+        static int ultimoId;
         int id;
         string nombre;
         string apellido;
@@ -19,13 +20,18 @@ namespace Dominio
 
         public Usuario() { }
 
-        public Usuario(int id, string nombre, string apellido, string email, string clave)
+        public Usuario(string nombre, string apellido, string email, string clave)
         {
-            this.id = id;
+            this.id = ++ultimoId;
             this.nombre = nombre;
             this.apellido = apellido;
             this.email = email;
             this.clave = clave;
+        }
+
+        public override string ToString()
+        {
+            return $"Usuario Nro ({id}) | {nombre.ToUpper()} {apellido.ToUpper()} | {email} ";
         }
     }
 

@@ -12,12 +12,15 @@ namespace Dominio
     {
         decimal saldoDisponible;
 
-        public Cliente(int id, string nombre, string apellido, string email, string clave, decimal saldoDisponible) : base(id, nombre, apellido, email, clave)
+        public Cliente(string nombre, string apellido, string email, string clave, decimal saldoDisponible) : base(nombre, apellido, email, clave)
         {
             this.saldoDisponible = saldoDisponible;
         }
 
-    
+        public override string ToString()
+        {
+            return $"Cliente Nro ({Id}) | {Nombre.ToUpper().PadLeft(5)} {Apellido.ToUpper().PadRight(5)} | {Email.PadRight(10)} | Saldo: ${saldoDisponible} ";
+        }
     }
 
 }

@@ -1,7 +1,10 @@
 ﻿namespace obligatorio_p2
 {
+    using Dominio;
     internal class Program
     {
+        static Sistema unSistema = new Sistema();
+
         static void Main(string[] args)
         {
             Opciones();
@@ -53,12 +56,20 @@
 
         static void ListarTodosLosClientes()
         {
-            Console.WriteLine("Listado de Clientes");
+
+            Console.WriteLine("Listado de Clientes:");
+            List<Usuario> clientes = unSistema.ObtenerClientes();
+            foreach (Usuario unCliente in clientes)
+            {
+                Console.WriteLine(unCliente.ToString());
+            }
             Console.ReadLine();
+
         }
 
         static void ListarArticulosPorCategoria()
         {
+
             Console.WriteLine("Listado de articulos en categoria: X");
             Console.ReadLine();
         }
