@@ -71,6 +71,7 @@
         {
 
             Console.WriteLine("Listado de articulos en categoria: X");
+            foreach (Articulo unArticulo in listaArticulos)
             Console.ReadLine();
         }
 
