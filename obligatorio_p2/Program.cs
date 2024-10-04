@@ -56,13 +56,20 @@
 
         static void ListarTodosLosClientes()
         {
-
-            Console.WriteLine("Listado de Clientes:");
-            List<Usuario> clientes = unSistema.ObtenerClientes();
-            foreach (Usuario unCliente in clientes)
+            try
             {
-                Console.WriteLine(unCliente.ToString());
+                Console.WriteLine("Listado de Clientes:");
+                List<Usuario> clientes = unSistema.ObtenerClientes();
+                foreach (Usuario unCliente in clientes)
+                {
+                    Console.WriteLine(unCliente.ToString());
+                }
             }
+            catch (Exception unError)
+            {
+                Console.WriteLine(unError);
+            }
+            
             Console.ReadLine();
 
         }
@@ -82,13 +89,23 @@
             Console.WriteLine("\n");
 
 
-            string texto = Utils.PedirTexto("Ingrese la categoría a listar");
+           
+            
 
-            List<Articulo> articulosParaListar = unSistema.FiltrarArticulosCategoria(texto);
-
-            foreach (Articulo unArticulo in articulosParaListar)
+            try 
             {
-                Console.WriteLine(unArticulo.ToString());
+                string texto = Utils.PedirTexto("Ingrese la categoría a listar");
+
+                List<Articulo> articulosParaListar = unSistema.FiltrarArticulosCategoria(texto);
+
+                foreach (Articulo unArticulo in articulosParaListar)
+                {
+                    Console.WriteLine(unArticulo.ToString());
+                }
+            }
+            catch (Exception unError)
+            {
+                Console.WriteLine(unError);
             }
             Console.ReadLine();
         }
@@ -117,6 +134,9 @@
         static void ListarPublicacionesEntreFechas()
         {
             Console.WriteLine("Listado Publicaciones desde 20/09 hasta 24/09");
+
+            List<Publicacion> publicacionesEntreFechas = unSistema.ObtenerPublicacionesEntreFechas(fechaComienzo, fechaFin);
+
             Console.ReadLine();
         }
 

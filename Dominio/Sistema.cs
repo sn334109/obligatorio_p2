@@ -54,6 +54,11 @@ namespace Dominio
                     aux.Add(unArticulo);
                 }
             }
+
+            if (aux.Count == 0)
+            {
+                throw new Exception("No hay articulos en esa categoria para listar");
+            }
             return aux;
         }
         public List<String> ListarCategorias()
@@ -92,6 +97,31 @@ namespace Dominio
                     aux.Add(unUsuario);
                }
             }
+
+            if (aux.Count == 0)
+            {
+                throw new Exception("No hay clientes para listar");
+            }
+            return aux;
+        }
+
+        public List<Publicacion> ObtenerPublicacionesEntreFechas(DateTime fechaComienzo, DateTime fechaFin)
+        {
+            List<Publicacion> aux = new List<Publicacion>();
+
+            foreach (Publicacion unaPublicacion in listaPublicaciones)
+            {
+                if (unaPublicacion.FechaPublicacion.Date >= fechaComienzo.Date && unaPublicacion.FechaPublicacion.Date <= fechaFin.Date)
+                {
+                    aux.Add(unaPublicacion);
+                }
+            }
+
+            if (aux.Count == 0)
+            {
+                throw new Exception("No hay publicaciones para listar entre las fechas indicadas");
+            }
+
             return aux;
         }
 
@@ -100,16 +130,16 @@ namespace Dominio
         private void PrecargaClientes() 
         {
             //prompt1 precarga
-            AgregarCliente(new Cliente("Federico", "Martinez", "fede@gmail.com", "123456", 2000));
-            AgregarCliente(new Cliente("Ana", "Gonzalez", "ana.gonzalez@gmail.com", "654321", 3000));
-            AgregarCliente(new Cliente("Javier", "Lopez", "javier.lopez@hotmail.com", "abcdef", 1500));
-            AgregarCliente(new Cliente("María", "Perez", "maria.perez@yahoo.com", "mariap123", 5000));
-            AgregarCliente(new Cliente("Luis", "Ramirez", "luis.ramirez@gmail.com", "ramirez123", 3500));
-            AgregarCliente(new Cliente("Carla", "Fernandez", "carla.f@hotmail.com", "carla456", 2500));
-            AgregarCliente(new Cliente("Pedro", "Sanchez", "pedro.sanchez@yahoo.com", "pedrosan", 4000));
-            AgregarCliente(new Cliente("Sofia", "Gutierrez", "sofia.gutierrez@gmail.com", "sg123456", 4500));
-            AgregarCliente(new Cliente("Ricardo", "Diaz", "ricardo.diaz@gmail.com", "rDiaz2021", 3200));
-            AgregarCliente(new Cliente("Laura", "Mendez", "laura.mendez@hotmail.com", "lauraM", 2700));
+            //AgregarCliente(new Cliente("Federico", "Martinez", "fede@gmail.com", "123456", 2000));
+            //AgregarCliente(new Cliente("Ana", "Gonzalez", "ana.gonzalez@gmail.com", "654321", 3000));
+            //AgregarCliente(new Cliente("Javier", "Lopez", "javier.lopez@hotmail.com", "abcdef", 1500));
+            //AgregarCliente(new Cliente("María", "Perez", "maria.perez@yahoo.com", "mariap123", 5000));
+            //AgregarCliente(new Cliente("Luis", "Ramirez", "luis.ramirez@gmail.com", "ramirez123", 3500));
+            //AgregarCliente(new Cliente("Carla", "Fernandez", "carla.f@hotmail.com", "carla456", 2500));
+            //AgregarCliente(new Cliente("Pedro", "Sanchez", "pedro.sanchez@yahoo.com", "pedrosan", 4000));
+            //AgregarCliente(new Cliente("Sofia", "Gutierrez", "sofia.gutierrez@gmail.com", "sg123456", 4500));
+            //AgregarCliente(new Cliente("Ricardo", "Diaz", "ricardo.diaz@gmail.com", "rDiaz2021", 3200));
+            //AgregarCliente(new Cliente("Laura", "Mendez", "laura.mendez@hotmail.com", "lauraM", 2700));
         }
 
 
