@@ -15,10 +15,11 @@ namespace Dominio
         List<Publicacion> listaPublicaciones = new List<Publicacion>();
         List<Articulo> listaArticulos = new List<Articulo>();
         List<Usuario> listaDeUsuarios = new List<Usuario>();
+        List<Oferta> listaOfertas = new List<Oferta>();
         //SINGLETON
-        public static Sistema Instancia 
+        public static Sistema Instancia
         {
-            get 
+            get
             {
                 if (instancia == null)
                 {
@@ -30,26 +31,26 @@ namespace Dominio
 
         public List<Articulo> ListaArticulos { get => listaArticulos; }
 
-        private Sistema() 
+        private Sistema()
         {
             PrecargaClientes();
             PrecargaUsuariosAdmin();
             PrecargaArticulos();
         }
 
-        public List<Cliente> ListarClientes() 
+        public List<Cliente> ListarClientes()
         {
             List<Cliente> listadoDeClientes = new List<Cliente>();
             return listadoDeClientes;
         }
 
-        public List<Articulo> FiltrarArticulosCategoria(string categoria) 
+        public List<Articulo> FiltrarArticulosCategoria(string categoria)
         {
             List<Articulo> aux = new List<Articulo>();
 
-            foreach(Articulo unArticulo in listaArticulos) 
+            foreach (Articulo unArticulo in listaArticulos)
             {
-                if (unArticulo.Categoria.ToUpper() == categoria.ToUpper()) 
+                if (unArticulo.Categoria.ToUpper() == categoria.ToUpper())
                 {
                     aux.Add(unArticulo);
                 }
@@ -75,27 +76,27 @@ namespace Dominio
             return aux;
         }
 
-        public void AltaArticulo(Articulo articulo) 
+        public void AltaArticulo(Articulo articulo)
         {
             listaArticulos.Add(articulo);
         }
 
-        public List<Publicacion> ListarPublicacionesFecha(DateTime fechaInicial, DateTime fechaFinal) 
+        public List<Publicacion> ListarPublicacionesFecha(DateTime fechaInicial, DateTime fechaFinal)
         {
             return listaPublicaciones;
         }
 
         //METODOS
         //filtramos administradores quedandonos con clientes
-        public List<Usuario> ObtenerClientes() 
+        public List<Usuario> ObtenerClientes()
         {
             List<Usuario> aux = new List<Usuario>();
-            foreach(Usuario unUsuario in listaDeUsuarios) 
+            foreach (Usuario unUsuario in listaDeUsuarios)
             {
-               if (unUsuario is Cliente) 
-               {
+                if (unUsuario is Cliente)
+                {
                     aux.Add(unUsuario);
-               }
+                }
             }
 
             if (aux.Count == 0)
@@ -127,7 +128,7 @@ namespace Dominio
 
 
         // PRECARGA DE CLIENTES
-        private void PrecargaClientes() 
+        private void PrecargaClientes()
         {
             //prompt1 precarga
             //AgregarCliente(new Cliente("Federico", "Martinez", "fede@gmail.com", "123456", 2000));
@@ -152,7 +153,7 @@ namespace Dominio
 
 
         //PRECARGA ARTICULOS
-        private void PrecargaArticulos() 
+        private void PrecargaArticulos()
         {
             AgregarArticulo(new Articulo("Pelota de fútbol", "Equipamiento exterior", 200));
             AgregarArticulo(new Articulo("Pelota de baloncesto", "Equipamiento interior", 180));
@@ -207,6 +208,18 @@ namespace Dominio
             AgregarArticulo(new Articulo("Balón de waterpolo", "Equipamiento interior", 85));
         }
 
+        private void PrecargaPublicaciones() 
+        {
+            List<Articulo> listaArticulosVenta1 = new List<Articulo>();
+            
+            //10 publicaciones ventas (2 con ofertas)
+            CrearPublicacion(new Venta("Pesas", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, listaArticulosVenta1,  ));
+
+            //10 publicaciones subastas (2 subastas abiertas)
+            CrearPublicacion()
+        }
+
+
         //Metodos de creación
         public void AgregarCliente(Cliente unCliente)
         {
@@ -234,7 +247,6 @@ namespace Dominio
             }
         }
 
-        
         public void AgregarArticulo(Articulo unArticulo) 
         {
             try
@@ -248,6 +260,20 @@ namespace Dominio
             }
         }
 
+        public void CrearVenta(Venta unaVenta) 
+        {
+            listaPublicaciones.Add(unaVenta);
+        }
+
+        public void CrearSubasta(Subasta unaSubasta) 
+        {
+            listaPublicaciones.Add(unaSubasta);
+        }
+
+        public void CrearOferta(Oferta unaOferta)
+        {
+            listaOfertas.Add(unaOferta);
+        }
 
     }
 }

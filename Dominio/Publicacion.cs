@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Publicacion
     {
+        static int ultimoId;
         int id;
         string nombre;
         Enums.EstadoPublicacion estado;
@@ -28,9 +29,9 @@ namespace Dominio
 
         public Publicacion() { }
 
-        public Publicacion(int id, string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Cliente cliente, Usuario usuarioFinal, DateTime fechaCierre)
+        public Publicacion(string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Cliente cliente, Usuario usuarioFinal, DateTime fechaCierre)
         {
-            this.id = id;
+            this.id = ++ultimoId;
             this.nombre = nombre;
             this.estado = estado;
             this.fechaPublicacion = fechaPublicacion;
