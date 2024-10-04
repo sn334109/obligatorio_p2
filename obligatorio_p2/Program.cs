@@ -71,7 +71,25 @@
         {
 
             Console.WriteLine("Listado de articulos en categoria: X");
-            foreach (Articulo unArticulo in listaArticulos)
+
+            List<String> categorias = unSistema.ListarCategorias();
+
+            foreach (String unaCategoria in categorias)
+            {
+                Console.WriteLine(unaCategoria);
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+
+
+            string texto = Utils.PedirTexto("Ingrese la categoría a listar");
+
+            List<Articulo> articulosParaListar = unSistema.FiltrarArticulosCategoria(texto);
+
+            foreach (Articulo unArticulo in articulosParaListar)
+            {
+                Console.WriteLine(unArticulo.ToString());
+            }
             Console.ReadLine();
         }
 

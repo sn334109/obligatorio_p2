@@ -12,7 +12,11 @@ namespace Dominio
     public class Sistema
     {
         List<Publicacion> listaPublicaciones = new List<Publicacion>();
+
+
         List<Articulo> listaArticulos = new List<Articulo>();
+        public List<Articulo> ListaArticulos { get => listaArticulos; }
+
         List<Usuario> listaDeUsuarios = new List<Usuario>();
 
         public Sistema() 
@@ -28,7 +32,7 @@ namespace Dominio
             return listadoDeClientes;
         }
 
-        public List<Articulo> ListarArticulos(string categoria) 
+        public List<Articulo> FiltrarArticulosCategoria(string categoria) 
         {
             List<Articulo> aux = new List<Articulo>();
 
@@ -39,7 +43,20 @@ namespace Dominio
                     aux.Add(unArticulo);
                 }
             }
-            return listaArticulos;
+            return aux;
+        }
+        public List<String> ListarCategorias()
+        {
+            List<String> aux = new List<String>();
+
+            foreach (Articulo unArticulo in listaArticulos)
+            {
+                if (!(aux.Contains(unArticulo.Categoria)))
+                {
+                    aux.Add(unArticulo.Categoria);
+                }
+            }
+            return aux;
         }
 
         public void AltaArticulo(Articulo articulo) 
