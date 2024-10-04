@@ -11,15 +11,26 @@ namespace Dominio
 {
     public class Sistema
     {
+        private static Sistema instancia;
         List<Publicacion> listaPublicaciones = new List<Publicacion>();
-
-
         List<Articulo> listaArticulos = new List<Articulo>();
+        List<Usuario> listaDeUsuarios = new List<Usuario>();
+        //SINGLETON
+        public static Sistema Instancia 
+        {
+            get 
+            {
+                if (instancia == null)
+                {
+                    instancia = new Sistema();
+                }
+                return instancia;
+            }
+        }
+
         public List<Articulo> ListaArticulos { get => listaArticulos; }
 
-        List<Usuario> listaDeUsuarios = new List<Usuario>();
-
-        public Sistema() 
+        private Sistema() 
         {
             PrecargaClientes();
             PrecargaUsuariosAdmin();
@@ -60,7 +71,9 @@ namespace Dominio
         }
 
         public void AltaArticulo(Articulo articulo) 
-        { }
+        {
+            listaArticulos.Add(articulo);
+        }
 
         public List<Publicacion> ListarPublicacionesFecha(DateTime fechaInicial, DateTime fechaFinal) 
         {

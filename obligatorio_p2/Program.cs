@@ -3,7 +3,7 @@
     using Dominio;
     internal class Program
     {
-        static Sistema unSistema = new Sistema();
+        static Sistema unSistema = Sistema.Instancia;
 
         static void Main(string[] args)
         {
@@ -70,16 +70,16 @@
         static void ListarArticulosPorCategoria()
         {
 
-            Console.WriteLine("Listado de articulos en categoria: X");
+            Console.WriteLine("Lista articulos por algunas de las siguientes categorías");
+            Console.WriteLine("\n");
 
             List<String> categorias = unSistema.ListarCategorias();
 
             foreach (String unaCategoria in categorias)
             {
-                Console.WriteLine(unaCategoria);
+                Console.WriteLine(unaCategoria.PadRight(20));
             }
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("\n");
 
 
             string texto = Utils.PedirTexto("Ingrese la categoría a listar");
@@ -95,7 +95,22 @@
 
         static void AltaDeArticulo()
         {
-            Console.WriteLine("Listado de articulos en categoria: X");
+            Console.WriteLine("Ingrese datos necesario para crear articulo: \n");
+            string nombre = Utils.PedirTexto("Ingrese nombre del articulo ");
+            string categoria = Utils.PedirTexto("Ingrese categoria del articulo ");
+            int precio = Utils.LeerNumero($"Ingrese precio de {nombre} ");
+
+            
+            try
+            {
+                Articulo unArticulo = new Articulo(nombre, categoria, precio);
+                unSistema.AltaArticulo(unArticulo);
+                Utils.MensajeConfirmacion($"\nSe creo correctamente el articulo: \n\n\t Nombre: {nombre} \n\t Categoria: {categoria.ToUpper()} \n\t Precio: ${precio} \n\n ");
+            }
+            catch (Exception unError) 
+            {
+                Console.WriteLine(unError);
+            }
             Console.ReadLine();
         }
 

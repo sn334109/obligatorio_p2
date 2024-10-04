@@ -26,7 +26,7 @@ namespace Dominio
         {
             this.Id = ++ultimoId;
             this.Nombre = nombre;
-            this.Categoria = categoria;
+            this.Categoria = categoria.ToUpper();
             this.PrecioVenta = precioVenta;
         }
         public override string ToString()

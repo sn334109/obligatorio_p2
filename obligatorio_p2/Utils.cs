@@ -110,7 +110,7 @@ namespace obligatorio_p2
         }
         public static void MensajeConfirmacion(string mensaje)
         {
-            Console.BackgroundColor = ConsoleColor.Green;
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine($"---Confirmado----> {mensaje} -- Enter para seguir.");
             Console.BackgroundColor = ConsoleColor.Black;
