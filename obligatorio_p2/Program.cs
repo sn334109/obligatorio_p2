@@ -135,7 +135,7 @@
         {
             Console.WriteLine("Listado Publicaciones desde 20/09 hasta 24/09");
 
-            List<Publicacion> publicacionesEntreFechas = unSistema.ObtenerPublicacionesEntreFechas(fechaComienzo, fechaFin);
+            //List<Publicacion> publicacionesEntreFechas = unSistema.ObtenerPublicacionesEntreFechas(fechaComienzo, fechaFin);
 
             Console.ReadLine();
         }

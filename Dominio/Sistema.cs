@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Dominio.Enums;
 
 
 //TODO: poner el id autoincremental , ULTIMO ID
@@ -155,68 +157,85 @@ namespace Dominio
         //PRECARGA ARTICULOS
         private void PrecargaArticulos()
         {
-            AgregarArticulo(new Articulo("Pelota de fútbol", "Equipamiento exterior", 200));
-            AgregarArticulo(new Articulo("Pelota de baloncesto", "Equipamiento interior", 180));
-            AgregarArticulo(new Articulo("Camiseta de running", "Ropa deportiva", 50));
+            AgregarArticulo(new Articulo("Pelota de fútbol", "Deportes de equipo", 200));
+            AgregarArticulo(new Articulo("Pelota de baloncesto", "Deportes de equipo", 180));
+            AgregarArticulo(new Articulo("Pelota de voleibol", "Deportes de equipo", 90));
+
+            AgregarArticulo(new Articulo("Raqueta de tenis", "Deportes de raqueta", 150));
+            AgregarArticulo(new Articulo("Raqueta de squash", "Deportes de raqueta", 110));
+            AgregarArticulo(new Articulo("Red de tenis", "Deportes de raqueta", 200));
+
             AgregarArticulo(new Articulo("Zapatillas de tenis", "Calzado deportivo", 120));
-            AgregarArticulo(new Articulo("Guantes de ciclismo", "Accesorios", 25));
-            AgregarArticulo(new Articulo("Raqueta de tenis", "Equipamiento exterior", 150));
-            AgregarArticulo(new Articulo("Pelota de voleibol", "Equipamiento interior", 90));
-            AgregarArticulo(new Articulo("Shorts de fútbol", "Ropa deportiva", 40));
-            AgregarArticulo(new Articulo("Zapatillas de baloncesto", "Calzado deportivo", 130));
-            AgregarArticulo(new Articulo("Botella de agua", "Accesorios", 10));
-            AgregarArticulo(new Articulo("Casco de ciclismo", "Equipamiento exterior", 80));
-            AgregarArticulo(new Articulo("Pantalones de yoga", "Ropa deportiva", 60));
-            AgregarArticulo(new Articulo("Pelota de rugby", "Equipamiento exterior", 210));
-            AgregarArticulo(new Articulo("Malla de natación", "Ropa deportiva", 45));
             AgregarArticulo(new Articulo("Zapatillas de running", "Calzado deportivo", 100));
-            AgregarArticulo(new Articulo("Gorra de béisbol", "Accesorios", 20));
-            AgregarArticulo(new Articulo("Red de tenis", "Equipamiento exterior", 200));
-            AgregarArticulo(new Articulo("Bicicleta de montaña", "Equipamiento exterior", 900));
-            AgregarArticulo(new Articulo("Balón medicinal", "Equipamiento interior", 75));
-            AgregarArticulo(new Articulo("Camiseta de baloncesto", "Ropa deportiva", 55));
-            AgregarArticulo(new Articulo("Rodilleras", "Accesorios", 30));
-            AgregarArticulo(new Articulo("Saco de boxeo", "Equipamiento interior", 250));
-            AgregarArticulo(new Articulo("Gafas de natación", "Accesorios", 15));
-            AgregarArticulo(new Articulo("Zapatillas de boxeo", "Calzado deportivo", 85));
-            AgregarArticulo(new Articulo("Cuerda para saltar", "Accesorios", 12));
-            AgregarArticulo(new Articulo("Camiseta de tenis", "Ropa deportiva", 50));
-            AgregarArticulo(new Articulo("Zapatillas de escalada", "Calzado deportivo", 140));
-            AgregarArticulo(new Articulo("Rueda de abdominales", "Equipamiento interior", 35));
-            AgregarArticulo(new Articulo("Raqueta de squash", "Equipamiento interior", 110));
-            AgregarArticulo(new Articulo("Guantes de boxeo", "Accesorios", 55));
-            AgregarArticulo(new Articulo("Chaqueta impermeable", "Ropa deportiva", 70));
-            AgregarArticulo(new Articulo("Zapatillas de fútbol", "Calzado deportivo", 115));
-            AgregarArticulo(new Articulo("Tabla de surf", "Equipamiento exterior", 350));
-            AgregarArticulo(new Articulo("Bañador", "Ropa deportiva", 40));
-            AgregarArticulo(new Articulo("Patines en línea", "Equipamiento exterior", 160));
-            AgregarArticulo(new Articulo("Muñequeras", "Accesorios", 10));
-            AgregarArticulo(new Articulo("Espinilleras", "Accesorios", 25));
-            AgregarArticulo(new Articulo("Camiseta de ciclismo", "Ropa deportiva", 60));
-            AgregarArticulo(new Articulo("Pelota de handball", "Equipamiento interior", 100));
-            AgregarArticulo(new Articulo("Balón de golf", "Equipamiento exterior", 50));
-            AgregarArticulo(new Articulo("Bicicleta estática", "Equipamiento interior", 500));
             AgregarArticulo(new Articulo("Zapatillas de ciclismo", "Calzado deportivo", 180));
-            AgregarArticulo(new Articulo("Toalla de gimnasio", "Accesorios", 15));
-            AgregarArticulo(new Articulo("Cinturón de levantamiento de pesas", "Accesorios", 35));
-            AgregarArticulo(new Articulo("Zapatillas de entrenamiento", "Calzado deportivo", 90));
-            AgregarArticulo(new Articulo("Camiseta térmica", "Ropa deportiva", 65));
-            AgregarArticulo(new Articulo("Pesas rusas", "Equipamiento interior", 70));
-            AgregarArticulo(new Articulo("Set de mancuernas", "Equipamiento interior", 120));
-            AgregarArticulo(new Articulo("Banda elástica", "Accesorios", 20));
-            AgregarArticulo(new Articulo("Peto de entrenamiento", "Ropa deportiva", 15));
-            AgregarArticulo(new Articulo("Balón de waterpolo", "Equipamiento interior", 85));
+
+            AgregarArticulo(new Articulo("Casco de ciclismo", "Ciclismo", 80));
+            AgregarArticulo(new Articulo("Guantes de ciclismo", "Ciclismo", 25));
+            AgregarArticulo(new Articulo("Camiseta de ciclismo", "Ciclismo", 60));
+
+            AgregarArticulo(new Articulo("Bicicleta de montaña", "Aventura y aire libre", 900));
+            AgregarArticulo(new Articulo("Patines en línea", "Aventura y aire libre", 160));
+            AgregarArticulo(new Articulo("Tabla de surf", "Aventura y aire libre", 350));
+
+            AgregarArticulo(new Articulo("Malla de natación", "Natacion", 45));
+            AgregarArticulo(new Articulo("Gafas de natación", "Natacion", 15));
+            AgregarArticulo(new Articulo("Balón de waterpolo", "Natacion", 85));
+
+            AgregarArticulo(new Articulo("Saco de boxeo", "Deportes de combate", 250));
+            AgregarArticulo(new Articulo("Guantes de boxeo", "Deportes de combate", 55));
+            AgregarArticulo(new Articulo("Zapatillas de boxeo", "Deportes de combate", 85));
+
+            AgregarArticulo(new Articulo("Cuerda para saltar", "Fitness", 12));
+            AgregarArticulo(new Articulo("Pesas rusas", "Fitness", 70));
+            AgregarArticulo(new Articulo("Set de mancuernas", "Fitness", 120));
+
+            AgregarArticulo(new Articulo("Camiseta de running", "Ropa deportiva", 50));
+            AgregarArticulo(new Articulo("Shorts de fútbol", "Ropa deportiva", 40));
+            AgregarArticulo(new Articulo("Chaqueta impermeable", "Ropa deportiva", 70));
+
+            AgregarArticulo(new Articulo("Rodilleras", "Proteccion y seguridad", 30));
+            AgregarArticulo(new Articulo("Espinilleras", "Proteccion y seguridad", 25));
+            AgregarArticulo(new Articulo("Cinturón de levantamiento de pesas", "Proteccion y seguridad", 35));
+
+            AgregarArticulo(new Articulo("Pelota de golf", "Deportes individuales", 50));
+            AgregarArticulo(new Articulo("Rueda de abdominales", "Deportes individuales", 35));
+            AgregarArticulo(new Articulo("Bicicleta estática", "Deportes individuales", 500));
+
+            AgregarArticulo(new Articulo("Toalla de gimnasio", "Accesorios deportivos", 15));
+            AgregarArticulo(new Articulo("Botella de agua", "Accesorios deportivos", 10));
+            AgregarArticulo(new Articulo("Banda elástica", "Accesorios deportivos", 20));
+
+            AgregarArticulo(new Articulo("Balón medicinal", "Entrenamiento funcional", 75));
+            AgregarArticulo(new Articulo("Peto de entrenamiento", "Entrenamiento funcional", 15));
+            AgregarArticulo(new Articulo("Banda de resistencia", "Entrenamiento funcional", 20));
+
+            AgregarArticulo(new Articulo("Camiseta térmica", "Ropa tecnica", 65));
+            AgregarArticulo(new Articulo("Camiseta de baloncesto", "Ropa tecnica", 55));
+            AgregarArticulo(new Articulo("Camiseta de tenis", "Ropa tecnica", 50));
+
+            AgregarArticulo(new Articulo("Muñequeras", "Accesorios de entrenamiento", 10));
+            AgregarArticulo(new Articulo("Gorra de béisbol", "Accesorios de entrenamiento", 20));
+            AgregarArticulo(new Articulo("Cinturón de entrenamiento", "Accesorios de entrenamiento", 25));
+
+            AgregarArticulo(new Articulo("Pelota de rugby", "Deportes de contacto", 210));
+            AgregarArticulo(new Articulo("Espinilleras de rugby", "Deportes de contacto", 30));
+            AgregarArticulo(new Articulo("Guantes de rugby", "Deportes de contacto", 40));
+
+            AgregarArticulo(new Articulo("Pelota de cricket", "Deportes de bate", 120));
+            AgregarArticulo(new Articulo("Bate de béisbol", "Deportes de bate", 150));
+            AgregarArticulo(new Articulo("Guante de béisbol", "Deportes de bate", 100));
         }
+
+
+
 
         private void PrecargaPublicaciones() 
         {
-            List<Articulo> listaArticulosVenta1 = new List<Articulo>();
-            
-            //10 publicaciones ventas (2 con ofertas)
-            CrearPublicacion(new Venta("Pesas", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, listaArticulosVenta1,  ));
 
+            //10 publicaciones ventas (2 con ofertas)
+            CrearPublicacion(new Venta("Deportes de contacto", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de contacto"),true ));
             //10 publicaciones subastas (2 subastas abiertas)
-            CrearPublicacion()
+            // CrearPublicacion()
         }
 
 
@@ -260,19 +279,31 @@ namespace Dominio
             }
         }
 
+        public void CrearPublicacion(Publicacion unaPublicacion)
+        {
+            try
+            {
+                listaPublicaciones.Add(unaPublicacion);
+            }
+            catch (Exception unError)
+            {
+                throw unError;
+            }
+        }
+
         public void CrearVenta(Venta unaVenta) 
         {
-            listaPublicaciones.Add(unaVenta);
+            //listaPublicaciones.Add(unaVenta);
         }
 
         public void CrearSubasta(Subasta unaSubasta) 
         {
-            listaPublicaciones.Add(unaSubasta);
+            //listaPublicaciones.Add(unaSubasta);
         }
 
         public void CrearOferta(Oferta unaOferta)
         {
-            listaOfertas.Add(unaOferta);
+            //listaOfertas.Add(unaOferta);
         }
 
     }

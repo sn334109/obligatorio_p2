@@ -36,9 +36,9 @@ namespace Dominio
             this.estado = estado;
             this.fechaPublicacion = fechaPublicacion;
             this.articulosPublicados = articulosPublicados;
-            this.cliente = cliente;
-            this.usuarioFinal = usuarioFinal;
-            this.fechaCierre = fechaCierre;
+            this.cliente = cliente ?? null;
+            this.usuarioFinal = usuarioFinal ?? null;
+            this.fechaCierre = fechaCierre == default(DateTime) ? DateTime.MinValue : fechaCierre;
         }
     }
 }

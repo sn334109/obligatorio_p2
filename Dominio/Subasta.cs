@@ -16,7 +16,7 @@ namespace Dominio
         {
         }
 
-        public Subasta(int id, string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Cliente cliente, Usuario usuarioFinal, DateTime fechaCierre) : base(id, nombre, estado, fechaPublicacion, articulosPublicados, cliente, usuarioFinal, fechaCierre)
+        public Subasta(string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Cliente cliente, Usuario usuarioFinal, DateTime fechaCierre) : base(nombre, estado, fechaPublicacion, articulosPublicados, cliente, usuarioFinal, fechaCierre)
         {
         }
 
