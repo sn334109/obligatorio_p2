@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +29,9 @@ namespace Dominio
             this.Categoria = categoria;
             this.PrecioVenta = precioVenta;
         }
-
+        public override string ToString()
+        {
+            return $"Id: {Id}, Nombre: {Nombre}, Categoria: {Categoria}, Precio: ${PrecioVenta}";
+        }
     }
 }
