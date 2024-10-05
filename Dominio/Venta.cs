@@ -18,5 +18,10 @@ namespace Dominio
         {
             this.ofertaRelampago = ofertaRelampago;
         }
+
+        public override string ToString()
+        {
+            return $"LA VENTA: de {Nombre.ToUpper()}, Fecha publicación: {FechaPublicacion.Date}, con la lista de 3 articulos, {(ofertaRelampago ? "EN OFERTA RELAMPAGO" : "" )}";
+        }
     }
 }

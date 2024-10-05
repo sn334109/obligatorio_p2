@@ -38,6 +38,7 @@ namespace Dominio
             PrecargaClientes();
             PrecargaUsuariosAdmin();
             PrecargaArticulos();
+            PrecargaPublicaciones();
         }
 
         public List<Cliente> ListarClientes()
@@ -238,7 +239,8 @@ namespace Dominio
             CrearPublicacion(new Venta("Deportes de contacto", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de contacto"), null, null, null, false));
             CrearPublicacion(new Venta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de Bate"), null, null, null, true));
             //10 publicaciones subastas (2 subastas abiertas)
-            
+            //CrearSubasta(new Subasta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Pelota de rugby"), null, null, null));
+            //CrearSubasta(new Subasta("Deportes individuales", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes individuales"), null, null, null));
             // CrearPublicacion()
         }
 

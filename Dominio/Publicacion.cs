@@ -40,5 +40,10 @@ namespace Dominio
             this.usuarioFinal = usuarioFinal ?? null;
             this.fechaCierre = fechaCierre ?? null;
         }
+
+        public override string ToString()
+        {
+            return $"La Publicación de {nombre.ToUpper()}, Fecha publicación: {fechaPublicacion.Date}, con la lista de 3 articulos";
+        }
     }
 }

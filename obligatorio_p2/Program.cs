@@ -137,7 +137,7 @@
 
             DateTime fechaInicio = Utils.LeerFecha("Ingresa la fecha inicio");
             DateTime fechaFinal = Utils.LeerFecha("Ingresa la fecha final");
-            List<Publicacion> publicacionesEntreFechas = unSistema.ObtenerPublicacionesEntreFechas(fechaInicio, fechaFinal);
+            List<Publicacion> publicacionesEntreFechas = unSistema.ObtenerPublicacionesEntreFechas(fechaInicio.Date, fechaFinal.Date);
 
             foreach (Publicacion unaPublicacion in publicacionesEntreFechas) 
             {
