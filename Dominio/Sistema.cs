@@ -233,8 +233,12 @@ namespace Dominio
         {
 
             //10 publicaciones ventas (2 con ofertas)
-            CrearPublicacion(new Venta("Deportes de contacto", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de contacto"),true ));
+            CrearPublicacion(new Venta("Ropa tecnica", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Ropa tecnica"), null, null, null, true));
+            CrearPublicacion(new Venta("Accesorios de entrenamiento", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Accesorios de entrenamiento"), null, null, null, false));
+            CrearPublicacion(new Venta("Deportes de contacto", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de contacto"), null, null, null, false));
+            CrearPublicacion(new Venta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de Bate"), null, null, null, true));
             //10 publicaciones subastas (2 subastas abiertas)
+            
             // CrearPublicacion()
         }
 
@@ -293,7 +297,7 @@ namespace Dominio
 
         public void CrearVenta(Venta unaVenta) 
         {
-            //listaPublicaciones.Add(unaVenta);
+            listaPublicaciones.Add(unaVenta);
         }
 
         public void CrearSubasta(Subasta unaSubasta) 

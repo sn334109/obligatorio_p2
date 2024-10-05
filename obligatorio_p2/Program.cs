@@ -133,10 +133,16 @@
 
         static void ListarPublicacionesEntreFechas()
         {
-            Console.WriteLine("Listado Publicaciones desde 20/09 hasta 24/09");
+            Console.WriteLine("Selecciona rango de fechas, formato Dia/Mes/Año");
 
-            //List<Publicacion> publicacionesEntreFechas = unSistema.ObtenerPublicacionesEntreFechas(fechaComienzo, fechaFin);
+            DateTime fechaInicio = Utils.LeerFecha("Ingresa la fecha inicio");
+            DateTime fechaFinal = Utils.LeerFecha("Ingresa la fecha final");
+            List<Publicacion> publicacionesEntreFechas = unSistema.ObtenerPublicacionesEntreFechas(fechaInicio, fechaFinal);
 
+            foreach (Publicacion unaPublicacion in publicacionesEntreFechas) 
+            {
+                Console.WriteLine(unaPublicacion.ToString());
+            }
             Console.ReadLine();
         }
 

@@ -16,7 +16,7 @@ namespace Dominio
         List<Articulo> articulosPublicados;
         Cliente cliente;
         Usuario usuarioFinal;
-        DateTime fechaCierre;
+        DateTime? fechaCierre;
 
         public int Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
@@ -25,11 +25,11 @@ namespace Dominio
         public List<Articulo> ArticulosPublicados { get => articulosPublicados; set => articulosPublicados = value; }
         public Cliente Cliente { get => cliente; set => cliente = value; }
         public Usuario UsuarioFinal { get => usuarioFinal; set => usuarioFinal = value; }
-        public DateTime FechaCierre { get => fechaCierre; set => fechaCierre = value; }
+        public DateTime? FechaCierre { get => fechaCierre; set => fechaCierre = value; }
 
         public Publicacion() { }
 
-        public Publicacion(string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Cliente cliente, Usuario usuarioFinal, DateTime fechaCierre)
+        public Publicacion(string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Cliente cliente, Usuario usuarioFinal, DateTime? fechaCierre)
         {
             this.id = ++ultimoId;
             this.nombre = nombre;
@@ -38,7 +38,7 @@ namespace Dominio
             this.articulosPublicados = articulosPublicados;
             this.cliente = cliente ?? null;
             this.usuarioFinal = usuarioFinal ?? null;
-            this.fechaCierre = fechaCierre == default(DateTime) ? DateTime.MinValue : fechaCierre;
+            this.fechaCierre = fechaCierre ?? null;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Dominio
 
         public bool OfertaRelampago { get => ofertaRelampago; set => ofertaRelampago = value; }
 
-        public Venta(string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Cliente cliente, Usuario usuarioFinal, DateTime fechaCierre, bool ofertaRelampago) : base(nombre, estado, fechaPublicacion, articulosPublicados, cliente, usuarioFinal, fechaCierre)
+        public Venta(string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Cliente cliente, Usuario usuarioFinal, DateTime? fechaCierre, bool ofertaRelampago) : base(nombre, estado, fechaPublicacion, articulosPublicados, cliente, usuarioFinal, fechaCierre)
         {
             this.ofertaRelampago = ofertaRelampago;
         }
