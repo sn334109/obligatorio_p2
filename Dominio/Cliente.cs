@@ -21,6 +21,13 @@ namespace Dominio
         {
             return $"Cliente Nro ({Id}) | {Nombre.ToUpper().PadLeft(5)} {Apellido.ToUpper().PadRight(5)} | {Email.PadRight(10)} | Saldo: ${saldoDisponible} ";
         }
+
+        public override bool Equals(object? objetoRecibido)
+        {
+            return objetoRecibido is Cliente clienteRecibido && clienteRecibido.Id == Id;
+        }
+
+
     }
 
 }

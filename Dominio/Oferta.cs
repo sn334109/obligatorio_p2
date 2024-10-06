@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Oferta
     {
+        static int ultimoId;
         int id;
         Cliente cliente;
         decimal monto;
@@ -20,12 +21,13 @@ namespace Dominio
 
         public Oferta() {}
 
-        public Oferta(int id, Cliente cliente, decimal monto, DateTime fecha)
+        public Oferta(Cliente clienteQueOferto, decimal monto, DateTime fecha)
         {
-            this.id = id;
-            this.cliente = cliente;
+            this.id = ++ultimoId; ;
+            this.cliente = clienteQueOferto;
             this.monto = monto;
             this.fecha = fecha;
         }
+
     }
 }

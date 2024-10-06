@@ -17,18 +17,20 @@ namespace Dominio
         {
         }
 
-        public Subasta(string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Cliente cliente, Usuario usuarioFinal, DateTime? fechaCierre) : base(nombre, estado, fechaPublicacion, articulosPublicados, cliente, usuarioFinal, fechaCierre)
+        public Subasta(string nombre, Enums.EstadoPublicacion estado, DateTime fechaPublicacion, List<Articulo> articulosPublicados, Oferta oferta, Cliente cliente, Usuario usuarioFinal, DateTime? fechaCierre) : base(nombre, estado, fechaPublicacion, articulosPublicados, cliente, usuarioFinal, fechaCierre)
         {
         }
 
         public override string ToString()
         {
-            return $"LA SUBASTA: de {Nombre.ToUpper()}, Fecha publicación: {FechaPublicacion.Date}, con la lista de 3 articulo y lista de ofertas **";
+            return $"\n PUBLICACION EN SUBASTA {Estado}: {Nombre.ToUpper()} - Id: {Id}- FECHA DE PUBLICACION: {FechaPublicacion.ToString("dd/MM/yyyy")} \n ARTICULOS DE LA PUBLICACION: {string.Join("-- ", ArticulosPublicados.Select(a => a.Nombre))}   \n y lista de ofertas ";
         }
 
         //devuelve OFERTA
         public void BuscarMejorOferta()
         {
         }
+
+        
     }
 }

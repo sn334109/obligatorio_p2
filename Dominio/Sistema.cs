@@ -39,6 +39,7 @@ namespace Dominio
             PrecargaUsuariosAdmin();
             PrecargaArticulos();
             PrecargaPublicaciones();
+            PrecargaOfertas();
         }
 
         public List<Cliente> ListarClientes()
@@ -134,16 +135,16 @@ namespace Dominio
         private void PrecargaClientes()
         {
             //prompt1 precarga
-            //AgregarCliente(new Cliente("Federico", "Martinez", "fede@gmail.com", "123456", 2000));
-            //AgregarCliente(new Cliente("Ana", "Gonzalez", "ana.gonzalez@gmail.com", "654321", 3000));
-            //AgregarCliente(new Cliente("Javier", "Lopez", "javier.lopez@hotmail.com", "abcdef", 1500));
-            //AgregarCliente(new Cliente("María", "Perez", "maria.perez@yahoo.com", "mariap123", 5000));
-            //AgregarCliente(new Cliente("Luis", "Ramirez", "luis.ramirez@gmail.com", "ramirez123", 3500));
-            //AgregarCliente(new Cliente("Carla", "Fernandez", "carla.f@hotmail.com", "carla456", 2500));
-            //AgregarCliente(new Cliente("Pedro", "Sanchez", "pedro.sanchez@yahoo.com", "pedrosan", 4000));
-            //AgregarCliente(new Cliente("Sofia", "Gutierrez", "sofia.gutierrez@gmail.com", "sg123456", 4500));
-            //AgregarCliente(new Cliente("Ricardo", "Diaz", "ricardo.diaz@gmail.com", "rDiaz2021", 3200));
-            //AgregarCliente(new Cliente("Laura", "Mendez", "laura.mendez@hotmail.com", "lauraM", 2700));
+            AgregarCliente(new Cliente("Federico", "Martinez", "fede@gmail.com", "123456", 2000));
+            AgregarCliente(new Cliente("Ana", "Gonzalez", "ana.gonzalez@gmail.com", "654321", 3000));
+            AgregarCliente(new Cliente("Javier", "Lopez", "javier.lopez@hotmail.com", "abcdef", 1500));
+            AgregarCliente(new Cliente("María", "Perez", "maria.perez@yahoo.com", "mariap123", 5000));
+            AgregarCliente(new Cliente("Luis", "Ramirez", "luis.ramirez@gmail.com", "ramirez123", 3500));
+            AgregarCliente(new Cliente("Carla", "Fernandez", "carla.f@hotmail.com", "carla456", 2500));
+            AgregarCliente(new Cliente("Pedro", "Sanchez", "pedro.sanchez@yahoo.com", "pedrosan", 4000));
+            AgregarCliente(new Cliente("Sofia", "Gutierrez", "sofia.gutierrez@gmail.com", "sg123456", 4500));
+            AgregarCliente(new Cliente("Ricardo", "Diaz", "ricardo.diaz@gmail.com", "rDiaz2021", 3200));
+            AgregarCliente(new Cliente("Laura", "Mendez", "laura.mendez@hotmail.com", "lauraM", 2700));
         }
 
 
@@ -238,12 +239,60 @@ namespace Dominio
             CrearPublicacion(new Venta("Accesorios de entrenamiento", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Accesorios de entrenamiento"), null, null, null, false));
             CrearPublicacion(new Venta("Deportes de contacto", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de contacto"), null, null, null, false));
             CrearPublicacion(new Venta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de Bate"), null, null, null, true));
+
+            CrearPublicacion(new Venta("Deportes de equipo", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de equipo"), null, null, null, false));
+            CrearPublicacion(new Venta("Deportes de raqueta", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de raqueta"), null, null, null, true));
+            CrearPublicacion(new Venta("Calzado deportivo", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Calzado deportivo"), null, null, null, true));
+            CrearPublicacion(new Venta("Ciclismo", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Ciclismo"), null, null, null, false));
+            CrearPublicacion(new Venta("Aventura y aire libre", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Aventura y aire libre"), null, null, null, true));
+            CrearPublicacion(new Venta("Natacion", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Natacion"), null, null, null, false));
+            CrearPublicacion(new Venta("Fitness", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Fitness"), null, null, null, true));
+            CrearPublicacion(new Venta("Proteccion y seguridad", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Proteccion y seguridad"), null, null, null, false));
             //10 publicaciones subastas (2 subastas abiertas)
-            //CrearSubasta(new Subasta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Pelota de rugby"), null, null, null));
-            //CrearSubasta(new Subasta("Deportes individuales", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes individuales"), null, null, null));
-            // CrearPublicacion()
+            CrearPublicacion(new Subasta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de Bate"), ObtenerOfertaPorId(1), null, null, null));
+            CrearPublicacion(new Subasta("Deportes individuales", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes individuales"), ObtenerOfertaPorId(4), null, null, null));
         }
 
+        //link de las ofertas en chatgpt   https://chatgpt.com/c/6701f28b-8fd0-8009-9694-94b6331dcf99
+        private void PrecargaOfertas()
+        {
+            CrearOferta(new Oferta(ObtenerClientePorId(1), 400, DateTime.Now)); 
+            CrearOferta(new Oferta(ObtenerClientePorId(2), 450, DateTime.Now)); 
+            CrearOferta(new Oferta(ObtenerClientePorId(3), 500, DateTime.Now)); 
+            CrearOferta(new Oferta(ObtenerClientePorId(4), 550, DateTime.Now)); 
+            CrearOferta(new Oferta(ObtenerClientePorId(5), 600, DateTime.Now)); 
+            CrearOferta(new Oferta(ObtenerClientePorId(6), 650, DateTime.Now)); 
+            CrearOferta(new Oferta(ObtenerClientePorId(7), 700, DateTime.Now)); 
+            CrearOferta(new Oferta(ObtenerClientePorId(8), 750, DateTime.Now)); 
+            CrearOferta(new Oferta(ObtenerClientePorId(9), 800, DateTime.Now)); 
+            CrearOferta(new Oferta(ObtenerClientePorId(10), 850, DateTime.Now)); 
+
+        }
+
+        public Cliente ObtenerClientePorId(int Id)
+        {
+            foreach (Usuario unUsuario in listaDeUsuarios)
+            {
+
+                if (unUsuario.Id.Equals(Id) && unUsuario is Cliente)
+                {
+                    return (Cliente)unUsuario;
+                }
+            }
+            return null;
+        }
+        public Oferta ObtenerOfertaPorId(int Id)
+        {
+            foreach (Oferta unaOferta in listaOfertas)
+            {
+
+                if (unaOferta.Id.Equals(Id) && unaOferta is Oferta)
+                {
+                    return unaOferta;
+                }
+            }
+            return null;
+        }
 
         //Metodos de creación
         public void AgregarCliente(Cliente unCliente)
@@ -304,13 +353,14 @@ namespace Dominio
 
         public void CrearSubasta(Subasta unaSubasta) 
         {
-            //listaPublicaciones.Add(unaSubasta);
+            listaPublicaciones.Add(unaSubasta);
         }
 
         public void CrearOferta(Oferta unaOferta)
         {
-            //listaOfertas.Add(unaOferta);
+            listaOfertas.Add(unaOferta);
         }
+
 
     }
 }
