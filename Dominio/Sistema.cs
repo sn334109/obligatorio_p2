@@ -17,9 +17,12 @@ namespace Dominio
         List<Publicacion> listaPublicaciones = new List<Publicacion>();
         List<Articulo> listaArticulos = new List<Articulo>();
         List<Usuario> listaDeUsuarios = new List<Usuario>();
-        List<Oferta> listaOfertas = new List<Oferta>();
+
+        Subasta unaSubasta = new Subasta(); //para poder llamar el metodo que esta en la clase subasta
+
         //SINGLETON
         public static Sistema Instancia
+
         {
             get
             {
@@ -39,7 +42,7 @@ namespace Dominio
             PrecargaUsuariosAdmin();
             PrecargaArticulos();
             PrecargaPublicaciones();
-            PrecargaOfertas();
+            unaSubasta.PrecargaOfertas();
         }
 
         public List<Cliente> ListarClientes()
@@ -230,8 +233,9 @@ namespace Dominio
 
 
 
+        
 
-        private void PrecargaPublicaciones() 
+        private void PrecargaPublicaciones()
         {
 
             //10 publicaciones ventas (2 con ofertas)
@@ -249,50 +253,32 @@ namespace Dominio
             CrearPublicacion(new Venta("Fitness", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Fitness"), null, null, null, true));
             CrearPublicacion(new Venta("Proteccion y seguridad", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Proteccion y seguridad"), null, null, null, false));
             //10 publicaciones subastas (2 subastas abiertas)
-            CrearPublicacion(new Subasta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de Bate"), ObtenerOfertaPorId(1), null, null, null));
-            CrearPublicacion(new Subasta("Deportes individuales", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes individuales"), ObtenerOfertaPorId(4), null, null, null));
+            CrearPublicacion(new Subasta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de Bate"), unaSubasta.CrearListaDeOfertas(), null, null, null));
+            CrearPublicacion(new Subasta("Deportes individuales", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes individuales"), unaSubasta.CrearListaDeOfertas(), null, null, null));
         }
 
         //link de las ofertas en chatgpt   https://chatgpt.com/c/6701f28b-8fd0-8009-9694-94b6331dcf99
-        private void PrecargaOfertas()
-        {
-            CrearOferta(new Oferta(ObtenerClientePorId(1), 400, DateTime.Now)); 
-            CrearOferta(new Oferta(ObtenerClientePorId(2), 450, DateTime.Now)); 
-            CrearOferta(new Oferta(ObtenerClientePorId(3), 500, DateTime.Now)); 
-            CrearOferta(new Oferta(ObtenerClientePorId(4), 550, DateTime.Now)); 
-            CrearOferta(new Oferta(ObtenerClientePorId(5), 600, DateTime.Now)); 
-            CrearOferta(new Oferta(ObtenerClientePorId(6), 650, DateTime.Now)); 
-            CrearOferta(new Oferta(ObtenerClientePorId(7), 700, DateTime.Now)); 
-            CrearOferta(new Oferta(ObtenerClientePorId(8), 750, DateTime.Now)); 
-            CrearOferta(new Oferta(ObtenerClientePorId(9), 800, DateTime.Now)); 
-            CrearOferta(new Oferta(ObtenerClientePorId(10), 850, DateTime.Now)); 
-
-        }
+       
 
         public Cliente ObtenerClientePorId(int Id)
         {
             foreach (Usuario unUsuario in listaDeUsuarios)
             {
 
-                if (unUsuario.Id.Equals(Id) && unUsuario is Cliente)
+                if (unUsuario.Id.Equals(Id))
                 {
                     return (Cliente)unUsuario;
                 }
             }
             return null;
         }
-        public Oferta ObtenerOfertaPorId(int Id)
-        {
-            foreach (Oferta unaOferta in listaOfertas)
-            {
 
-                if (unaOferta.Id.Equals(Id) && unaOferta is Oferta)
-                {
-                    return unaOferta;
-                }
-            }
-            return null;
+        public void AgregarOfertaAUnaPublicacion(int idDePublicacaion, int idOferta)
+        { 
+            
         }
+
+        
 
         //Metodos de creación
         public void AgregarCliente(Cliente unCliente)
@@ -308,8 +294,8 @@ namespace Dominio
             }
         }
 
-        public void AgregarAdmin(Admin unAdmin) 
-        {  
+        public void AgregarAdmin(Admin unAdmin)
+        {
             try
             {
                 //TODO: agregar validaciones requeridas
@@ -321,14 +307,14 @@ namespace Dominio
             }
         }
 
-        public void AgregarArticulo(Articulo unArticulo) 
+        public void AgregarArticulo(Articulo unArticulo)
         {
             try
             {
                 //TODO: agregar validaciones requeridas
                 listaArticulos.Add(unArticulo);
             }
-            catch (Exception unError) 
+            catch (Exception unError)
             {
                 throw unError;
             }
@@ -346,20 +332,17 @@ namespace Dominio
             }
         }
 
-        public void CrearVenta(Venta unaVenta) 
+        public void CrearVenta(Venta unaVenta)
         {
             listaPublicaciones.Add(unaVenta);
         }
 
-        public void CrearSubasta(Subasta unaSubasta) 
+        public void CrearSubasta(Subasta unaSubasta)
         {
             listaPublicaciones.Add(unaSubasta);
         }
 
-        public void CrearOferta(Oferta unaOferta)
-        {
-            listaOfertas.Add(unaOferta);
-        }
+       
 
 
     }
