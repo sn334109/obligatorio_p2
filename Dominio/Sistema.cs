@@ -18,7 +18,6 @@ namespace Dominio
         List<Articulo> listaArticulos = new List<Articulo>();
         List<Usuario> listaDeUsuarios = new List<Usuario>();
 
-        Subasta unaSubasta = new Subasta(); //para poder llamar el metodo que esta en la clase subasta
 
         //SINGLETON
         public static Sistema Instancia
@@ -38,12 +37,15 @@ namespace Dominio
 
         private Sistema()
         {
+
             PrecargaClientes();
             PrecargaUsuariosAdmin();
             PrecargaArticulos();
             PrecargaPublicaciones();
-            unaSubasta.PrecargaOfertas();
         }
+
+        Subasta unaSubasta = new Subasta(); //para poder llamar el metodo que esta en la clase subasta
+
 
         public List<Cliente> ListarClientes()
         {
