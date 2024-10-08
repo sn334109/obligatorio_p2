@@ -74,9 +74,19 @@ namespace Dominio
             return texto;
         }
 
+        public string listarNombresArticulosPublicados()
+        {
+            string texto = "";
+            foreach (Articulo unArticulo in ArticulosPublicados)
+            {
+                texto += $" --{unArticulo.Nombre}";
+            }
+            return texto;
+        }
+
         public override string ToString()
         {
-            return $"\n PUBLICACION EN SUBASTA {Estado}: {Nombre.ToUpper()} - Id: {Id}- FECHA DE PUBLICACION: {FechaPublicacion.ToString("dd/MM/yyyy")} \n ARTICULOS DE LA PUBLICACION: {string.Join("-- ", ArticulosPublicados.Select(a => a.Nombre))} \n LAS OFERTAS SON LAS SIGUIENTES: \n {listarNombresOfertas()} ";
+            return $"\n PUBLICACION EN SUBASTA {Estado}: {Nombre.ToUpper()} - Id: {Id}- FECHA DE PUBLICACION: {FechaPublicacion.ToString("dd/MM/yyyy")} \n ARTICULOS DE LA PUBLICACION: {listarNombresArticulosPublicados()} \n LAS OFERTAS SON LAS SIGUIENTES: \n {listarNombresOfertas()} ";
         }
 
         //devuelve OFERTA
