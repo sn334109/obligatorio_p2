@@ -14,6 +14,8 @@
         {
             string[] titulos = { "Listado de todos los clientes", "Listar artículos por categoría", "Alta de artículo", "Listar publicaciones entre fechas"};
 
+            Console.WriteLine("Presione 0 para finalizar el programa");
+
             int opcion = 1;
             foreach (string titulo in titulos)
             {
@@ -31,23 +33,48 @@
                 Menu();
                 Console.Write("Ingrese opcion:");
                 valor = LeerEntero();
+                
                 switch (valor)
                 {
                     case 1:
-                        ListarTodosLosClientes();
+                        try 
+                        {
+                            ListarTodosLosClientes();
+                        }
+                        catch (Exception unError) 
+                        {
+                            Utils.MensajeError(unError.Message);
+                        }
                         break;
                     case 2:
-                        ListarArticulosPorCategoria();
+                        try
+                        { 
+                            ListarArticulosPorCategoria();
+                        }
+                        catch (Exception unError)
+                        {
+                            Utils.MensajeError(unError.Message);
+                        }
                         break;
                     case 3:
                         AltaDeArticulo();
                         break;
                     case 4:
-                        ListarPublicacionesEntreFechas();
+                        try
+                        {
+                            ListarPublicacionesEntreFechas();
+                        }
+                        catch (Exception unError) 
+                        {
+                            Utils.MensajeError(unError.Message);
+                        }
                         break;
                     default:
-                        Console.WriteLine("No existe una función para ese número, intenta de nuevo");
-                        Console.ReadLine();
+                        if (valor != 0)
+                        {
+                            Console.WriteLine("No existe una función para ese número, intenta de nuevo");
+                            Console.ReadLine();
+                        }
                         break;
                 }
             }
@@ -67,7 +94,7 @@
             }
             catch (Exception unError)
             {
-                Console.WriteLine(unError);
+                Utils.MensajeError(unError.Message);
             }
             
             Console.ReadLine();
@@ -81,6 +108,12 @@
             Console.WriteLine("\n");
 
             List<String> categorias = unSistema.ListarCategorias();
+
+
+            if (categorias.Count == 0) 
+            {
+                throw new Exception("No hay categorias en el sistema");
+            }
 
             foreach (String unaCategoria in categorias)
             {

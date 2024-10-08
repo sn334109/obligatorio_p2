@@ -44,9 +44,6 @@ namespace Dominio
             PrecargaPublicaciones();
         }
 
-        Subasta unaSubasta = new Subasta(); //para poder llamar el metodo que esta en la clase subasta
-
-
         public List<Cliente> ListarClientes()
         {
             List<Cliente> listadoDeClientes = new List<Cliente>();
@@ -234,8 +231,29 @@ namespace Dominio
         }
 
 
+        Random random = new Random();
+        public List<Oferta> CrearListaDeOfertas()
+        {
+            List<int> idUsados = new List<int>(); 
+            List<Oferta> aux = new List<Oferta>();
 
-        
+            int contadorRandom = 0;
+
+            while (contadorRandom < 2)
+            {
+                int idAleatorio = random.Next(1, 11);
+                if (!idUsados.Contains(idAleatorio))
+                {
+                    idUsados.Add(idAleatorio);
+
+                    contadorRandom++;
+                    Oferta nuevaOferta = new Oferta(ObtenerClientePorId(idAleatorio), (500 * idAleatorio + 100), DateTime.Now);
+                    aux.Add(nuevaOferta);
+                }
+            }
+            return aux;
+        }
+
 
         private void PrecargaPublicaciones()
         {
@@ -255,8 +273,8 @@ namespace Dominio
             CrearPublicacion(new Venta("Fitness", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Fitness"), null, null, null, true));
             CrearPublicacion(new Venta("Proteccion y seguridad", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Proteccion y seguridad"), null, null, null, false));
             //10 publicaciones subastas (2 subastas abiertas)
-            CrearPublicacion(new Subasta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de Bate"), unaSubasta.CrearListaDeOfertas(), null, null, null));
-            CrearPublicacion(new Subasta("Deportes individuales", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes individuales"), unaSubasta.CrearListaDeOfertas(), null, null, null));
+            CrearPublicacion(new Subasta("Deportes de Bate", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes de Bate"), CrearListaDeOfertas(), null, null, null));
+            CrearPublicacion(new Subasta("Deportes individuales", Enums.EstadoPublicacion.ABIERTA, DateTime.Now, FiltrarArticulosCategoria("Deportes individuales"), CrearListaDeOfertas(), null, null, null));
         }
 
         //link de las ofertas en chatgpt   https://chatgpt.com/c/6701f28b-8fd0-8009-9694-94b6331dcf99
@@ -287,6 +305,11 @@ namespace Dominio
         {
             try
             {
+                //Validacion
+                if (unCliente.Nombre.Length == 0 || unCliente.Apellido.Length == 0) 
+                {
+                    throw new Exception("El nombre y el apellido no pueden estar vacíos");
+                }
                 //TODO: agregar validaciones requeridas
                 listaDeUsuarios.Add(unCliente);
             }

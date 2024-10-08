@@ -9,6 +9,7 @@ namespace Dominio
 {
     public class Subasta : Publicacion
     {
+        static Sistema unSistema = Sistema.Instancia;
         List<Oferta> listaOfertas = new List<Oferta>();
 
 
@@ -21,8 +22,6 @@ namespace Dominio
         {
             this.listaOfertas = ofertas;
         }
-
-        static Sistema unSistema = Sistema.Instancia;
 
         //public void PrecargaOfertas()
         //{
@@ -52,25 +51,6 @@ namespace Dominio
             
         }
 
-        Random random = new Random();
-        public List<Oferta> CrearListaDeOfertas()
-        {
-            List<Oferta> aux = new List<Oferta>();
-
-            int contadorRandom = 0;
-
-            while (contadorRandom < 3)
-            {
-                int idAleatorio = random.Next(1, 11);
-                contadorRandom++;
-                Oferta nuevaOferta =  new Oferta(unSistema.ObtenerClientePorId(idAleatorio), (500*idAleatorio+100), DateTime.Now);
-                aux.Add(nuevaOferta);
-                   
-
-            }
-            return aux;
-        }
-
         public Oferta ObtenerOfertaPorId(int Id)
         {
             foreach (Oferta unaOferta in listaOfertas)
@@ -83,7 +63,7 @@ namespace Dominio
             }
             return null;
         }
-        
+
         public string listarNombresOfertas()
         {
             string texto = "";
@@ -96,9 +76,7 @@ namespace Dominio
 
         public override string ToString()
         {
-            return $"\n PUBLICACION EN SUBASTA {Estado}: {Nombre.ToUpper()} - Id: {Id}- FECHA DE PUBLICACION: {FechaPublicacion.ToString("dd/MM/yyyy")} \n ARTICULOS DE LA PUBLICACION: {string.Join("-- ", ArticulosPublicados.Select(a => a.Nombre))}   \n {listarNombresOfertas()}";
-
-
+            return $"\n PUBLICACION EN SUBASTA {Estado}: {Nombre.ToUpper()} - Id: {Id}- FECHA DE PUBLICACION: {FechaPublicacion.ToString("dd/MM/yyyy")} \n ARTICULOS DE LA PUBLICACION: {string.Join("-- ", ArticulosPublicados.Select(a => a.Nombre))} \n LAS OFERTAS SON LAS SIGUIENTES: \n {listarNombresOfertas()} ";
         }
 
         //devuelve OFERTA
