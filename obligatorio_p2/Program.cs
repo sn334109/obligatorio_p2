@@ -3,16 +3,24 @@
     using Dominio;
     internal class Program
     {
-        static Sistema unSistema = Sistema.Instancia;
+        static Sistema unSistema;
 
         static void Main(string[] args)
         {
+            try
+            {
+             unSistema = Sistema.Instancia;
+            }
+            catch (Exception unError) 
+            {
+                Utils.MensajeError(unError.Message);
+            }
             Opciones();
         }
 
         static void Menu()
         {
-            string[] titulos = { "Listado de todos los clientes", "Listar artículos por categoría", "Alta de artículo", "Listar publicaciones entre fechas"};
+            string[] titulos = { "Listado de todos los clientes", "Listar artículos por categoría", "Alta de artículo", "Listar publicaciones entre fechas" };
 
             Console.WriteLine("Presione 0 para finalizar el programa");
 
@@ -33,28 +41,14 @@
                 Menu();
                 Console.Write("Ingrese opcion:");
                 valor = LeerEntero();
-                
+
                 switch (valor)
                 {
                     case 1:
-                        try 
-                        {
-                            ListarTodosLosClientes();
-                        }
-                        catch (Exception unError) 
-                        {
-                            Utils.MensajeError(unError.Message);
-                        }
+                        ListarTodosLosClientes();
                         break;
                     case 2:
-                        try
-                        { 
-                            ListarArticulosPorCategoria();
-                        }
-                        catch (Exception unError)
-                        {
-                            Utils.MensajeError(unError.Message);
-                        }
+                        ListarArticulosPorCategoria();
                         break;
                     case 3:
                         AltaDeArticulo();
@@ -64,7 +58,7 @@
                         {
                             ListarPublicacionesEntreFechas();
                         }
-                        catch (Exception unError) 
+                        catch (Exception unError)
                         {
                             Utils.MensajeError(unError.Message);
                         }
@@ -92,42 +86,38 @@
                 {
                     Console.WriteLine(unCliente.ToString());
                 }
+
+                Console.ReadLine();
             }
             catch (Exception unError)
             {
+
                 Utils.MensajeError(unError.Message);
             }
-            
-            Console.ReadLine();
 
         }
 
         static void ListarArticulosPorCategoria()
         {
-
-            Console.WriteLine("Lista articulos por algunas de las siguientes categorías");
-            Console.WriteLine("\n");
-
-            List<String> categorias = unSistema.ListarCategorias();
-
-
-            if (categorias.Count == 0) 
+            try
             {
-                throw new Exception("No hay categorias en el sistema");
-            }
+                Console.WriteLine("Lista articulos por algunas de las siguientes categorías");
+                Console.WriteLine("\n");
 
-            foreach (String unaCategoria in categorias)
-            {
-                Console.WriteLine(unaCategoria.PadRight(20));
-            }
-            Console.WriteLine("\n");
+                List<String> categorias = unSistema.ListarCategorias();
 
 
-           
-            
+                if (categorias.Count == 0)
+                {
+                    throw new Exception("No hay categorias en el sistema");
+                }
 
-            try 
-            {
+                foreach (String unaCategoria in categorias)
+                {
+                    Console.WriteLine(unaCategoria.PadRight(20));
+                }
+                Console.WriteLine("\n");
+
                 string texto = Utils.PedirTexto("Ingrese la categoría a listar");
 
                 List<Articulo> articulosParaListar = unSistema.FiltrarArticulosCategoria(texto);
@@ -139,7 +129,7 @@
             }
             catch (Exception unError)
             {
-                Console.WriteLine(unError);
+                Utils.MensajeError(unError.Message);
             }
             Console.ReadLine();
         }
@@ -151,14 +141,14 @@
             string categoria = Utils.PedirTexto("Ingrese categoria del articulo ");
             int precio = Utils.LeerNumero($"Ingrese precio de {nombre} ");
 
-            
+
             try
             {
                 Articulo unArticulo = new Articulo(nombre, categoria, precio);
                 unSistema.AltaArticulo(unArticulo);
                 Utils.MensajeConfirmacion($"\nSe creo correctamente el articulo: \n\n\t Nombre: {nombre} \n\t Categoria: {categoria.ToUpper()} \n\t Precio: ${precio} \n\n ");
             }
-            catch (Exception unError) 
+            catch (Exception unError)
             {
                 Console.WriteLine(unError);
             }
@@ -173,7 +163,7 @@
             DateTime fechaFinal = Utils.LeerFecha("Ingresa la fecha final");
             List<Publicacion> publicacionesEntreFechas = unSistema.ObtenerPublicacionesEntreFechas(fechaInicio.Date, fechaFinal.Date);
 
-            foreach (Publicacion unaPublicacion in publicacionesEntreFechas) 
+            foreach (Publicacion unaPublicacion in publicacionesEntreFechas)
             {
                 Console.WriteLine(unaPublicacion.ToString());
             }
@@ -181,7 +171,7 @@
         }
 
 
-     
+
 
         static int LeerEntero()
         {

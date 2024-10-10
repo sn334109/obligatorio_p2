@@ -33,6 +33,7 @@ namespace Dominio
 
         public List<Articulo> ListaArticulos { get => listaArticulos; }
 
+        //Precarga de Datos
         private Sistema()
         {
             PrecargaClientes();
@@ -41,12 +42,8 @@ namespace Dominio
             PrecargaPublicaciones();
         }
 
-        public List<Cliente> ListarClientes()
-        {
-            List<Cliente> listadoDeClientes = new List<Cliente>();
-            return listadoDeClientes;
-        }
 
+        //Listar Articulos segun la Categoria brindada
         public List<Articulo> FiltrarArticulosCategoria(string categoria)
         {
             List<Articulo> aux = new List<Articulo>();
@@ -65,6 +62,8 @@ namespace Dominio
             }
             return aux;
         }
+
+        //Para el metodo de listarArticulosPorCategoria, Necesitamos una Lista de categorias para poder mostrar en program.
         public List<String> ListarCategorias()
         {
             List<String> aux = new List<String>();
@@ -84,12 +83,8 @@ namespace Dominio
             listaArticulos.Add(articulo);
         }
 
-        public List<Publicacion> ListarPublicacionesFecha(DateTime fechaInicial, DateTime fechaFinal)
-        {
-            return listaPublicaciones;
-        }
-        
-        //METODOS
+        //METODOS UTILITARIOS
+        //Identificamos los usuarios que son Clientes
         public List<Usuario> ObtenerClientes()
         {
             List<Usuario> aux = new List<Usuario>();
@@ -129,7 +124,8 @@ namespace Dominio
         }
 
 
-        // PRECARGA DE CLIENTES
+        // PRECARGA DE ENTIDADES CONTROLADAS POR SISTEMA
+        //Precarga de Clientes
         private void PrecargaClientes()
         {
             AgregarCliente(new Cliente("Federico", "Martinez", "fede@gmail.com", "123456", 2000));
@@ -145,7 +141,7 @@ namespace Dominio
         }
 
 
-        //PRECARGA ADMINISTRADORES
+        //Precarga Administradores
         private void PrecargaUsuariosAdmin()
         {
             AgregarAdmin(new Admin("Cesar", "Martinez", "cesar@gmail.com", "c123456"));
@@ -153,7 +149,7 @@ namespace Dominio
         }
 
 
-        //PRECARGA ARTICULOS
+        //Precarga Articulos
         private void PrecargaArticulos()
         {
             AgregarArticulo(new Articulo("Pelota de fútbol", "Deportes de equipo", 200));
@@ -213,7 +209,7 @@ namespace Dominio
         Random random = new Random();
         public List<Oferta> CrearListaDeOfertas()
         {
-            List<int> idUsados = new List<int>(); 
+            List<int> idUsados = new List<int>();
             List<Oferta> aux = new List<Oferta>();
 
             int contadorRandom = 0;
@@ -276,19 +272,14 @@ namespace Dominio
             }
             return null;
         }
-                    
+
 
         //METODOS DE CREACION
         public void AgregarCliente(Cliente unCliente)
         {
             try
             {
-                //Validacion
-                if (unCliente.Nombre.Length == 0 || unCliente.Apellido.Length == 0) 
-                {
-                    throw new Exception("El nombre y el apellido no pueden estar vacíos");
-                }
-                //TODO: agregar validaciones requeridas
+                unCliente.Validar();
                 listaDeUsuarios.Add(unCliente);
             }
             catch (Exception unError)
@@ -301,7 +292,7 @@ namespace Dominio
         {
             try
             {
-                //TODO: agregar validaciones requeridas
+                unAdmin.Validar();
                 listaDeUsuarios.Add(unAdmin);
             }
             catch (Exception unError)
@@ -314,7 +305,7 @@ namespace Dominio
         {
             try
             {
-                //TODO: agregar validaciones requeridas
+                unArticulo.Validar();
                 listaArticulos.Add(unArticulo);
             }
             catch (Exception unError)
@@ -327,6 +318,7 @@ namespace Dominio
         {
             try
             {
+                unaPublicacion.Validar();
                 listaPublicaciones.Add(unaPublicacion);
             }
             catch (Exception unError)
@@ -337,16 +329,15 @@ namespace Dominio
 
         public void CrearVenta(Venta unaVenta)
         {
+
             listaPublicaciones.Add(unaVenta);
+
         }
 
         public void CrearSubasta(Subasta unaSubasta)
         {
             listaPublicaciones.Add(unaSubasta);
         }
-
-       
-
 
     }
 }

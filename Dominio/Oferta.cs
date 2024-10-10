@@ -19,7 +19,7 @@ namespace Dominio
         public decimal Monto { get => monto; set => monto = value; }
         public DateTime Fecha { get => fecha; set => fecha = value; }
 
-        public Oferta() {}
+        public Oferta() { }
 
         public Oferta(Cliente clienteQueOferto, decimal monto, DateTime fecha)
         {
@@ -28,8 +28,6 @@ namespace Dominio
             this.monto = monto;
             this.fecha = fecha;
         }
-
-        
 
     }
 }

@@ -12,8 +12,6 @@ namespace Dominio
         static Sistema unSistema = Sistema.Instancia;
         List<Oferta> listaOfertas = new List<Oferta>();
 
-
-
         public Subasta()
         {
         }
@@ -22,21 +20,6 @@ namespace Dominio
         {
             this.listaOfertas = ofertas;
         }
-
-        //public void PrecargaOfertas()
-        //{
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(1), 400, DateTime.Now));
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(2), 450, DateTime.Now));
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(3), 500, DateTime.Now));
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(4), 550, DateTime.Now));
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(5), 600, DateTime.Now));
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(6), 650, DateTime.Now));
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(7), 700, DateTime.Now));
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(8), 750, DateTime.Now));
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(9), 800, DateTime.Now));
-        //    CrearOferta(new Oferta(unSistema.ObtenerClientePorId(10), 850, DateTime.Now));
-
-        //}
 
         public void CrearOferta(Oferta unaOferta)
         {
@@ -48,7 +31,6 @@ namespace Dominio
             {
                 throw unError;
             }
-            
         }
 
         public Oferta ObtenerOfertaPorId(int Id)
@@ -94,6 +76,5 @@ namespace Dominio
         {
         }
 
-        
     }
 }

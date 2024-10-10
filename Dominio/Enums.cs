@@ -8,7 +8,7 @@ namespace Dominio
 {
     public class Enums
     {
-        public enum EstadoPublicacion 
+        public enum EstadoPublicacion
         {
             ABIERTA, CERRADA, CANCELADA
         }

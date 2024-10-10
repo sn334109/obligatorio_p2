@@ -29,6 +29,29 @@ namespace Dominio
             this.Categoria = categoria.ToUpper();
             this.PrecioVenta = precioVenta;
         }
+
+        public void ValidarCamposVacios()
+        {
+            if (Nombre.Length == 0 || Categoria.Length == 0)
+            {
+                throw new Exception("El nombre y Categoria no pueden estar vacios");
+            }
+        }
+
+        public void ValidarPrecioVentaPositivo()
+        {
+            if (PrecioVenta < 0)
+            {
+                throw new Exception("El precio del articulo debe ser un numero positivo");
+            }
+        }
+
+        public void Validar()
+        {
+            ValidarCamposVacios();
+            ValidarPrecioVentaPositivo();
+        }
+
         public override string ToString()
         {
             return $"Id: {Id}, Nombre: {Nombre}, Categoria: {Categoria}, Precio: ${PrecioVenta}";

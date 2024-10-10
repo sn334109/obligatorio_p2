@@ -41,6 +41,27 @@ namespace Dominio
             this.fechaCierre = fechaCierre ?? null;
         }
 
+        public void ValidarExistenciaArticulos()
+        {
+            if (articulosPublicados.Count == 0)
+            {
+                throw new Exception("La publicación debe tener al menos un Artículo");
+            }
+        }
+
+        public void ValidarNombre()
+        {
+            if (nombre.Length == 0)
+            {
+                throw new Exception("El nombre de la publicación no puede ser vacío");
+            }
+        }
+
+        public void Validar()
+        {
+            ValidarExistenciaArticulos();
+            ValidarNombre();
+        }
 
     }
 }
