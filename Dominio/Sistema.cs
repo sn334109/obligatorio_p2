@@ -80,6 +80,7 @@ namespace Dominio
 
         public void AltaArticulo(Articulo articulo)
         {
+            articulo.Validar();
             listaArticulos.Add(articulo);
         }
 

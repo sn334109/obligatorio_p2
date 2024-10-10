@@ -150,7 +150,7 @@
             }
             catch (Exception unError)
             {
-                Console.WriteLine(unError);
+                Utils.MensajeError(unError.Message);
             }
             Console.ReadLine();
         }
