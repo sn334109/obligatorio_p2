@@ -14,6 +14,11 @@ namespace Dominio
 
         public decimal SaldoDisponible { get => saldoDisponible; set => saldoDisponible = value; }
 
+        public Cliente() : base()
+        {
+            this.saldoDisponible = 3000;
+        }
+
         public Cliente(string nombre, string apellido, string email, string clave, decimal saldoDisponible) : base(nombre, apellido, email, clave)
         {
             this.SaldoDisponible = saldoDisponible;

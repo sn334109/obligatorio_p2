@@ -18,7 +18,10 @@ namespace Dominio
         public string Clave { get => clave; set => clave = value; }
 
 
-        public Usuario() { }
+        public Usuario() 
+        {
+            this.Id = ++ultimoId;
+        }
 
         public Usuario(string nombre, string apellido, string email, string clave)
         {

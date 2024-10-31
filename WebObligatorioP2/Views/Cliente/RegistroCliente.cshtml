@@ -1,0 +1,43 @@
+﻿@using Dominio;
+@model Cliente;
+
+@{
+    string nombre = "";
+    string apellido = "";
+    string email = "";
+    string clave = "";
+    decimal saldoDisponible = 0;
+}
+
+
+@if (ViewBag.error != null)
+{
+    <h4 class="alert-danger">
+        @ViewBag.error
+    </h4>
+}
+
+@if (ViewBag.mensajeExito != null)
+{
+    <h4 class="alert-success">
+        @ViewBag.mensajeExito
+    </h4>
+}
+
+@if (Model != null)
+{
+    nombre = Model.Nombre;
+    apellido = Model.Apellido;
+    email = Model.Email;
+    clave = Model.Clave;
+    saldoDisponible = Model.SaldoDisponible;
+} 
+
+<form method="post">
+    <input type="text" name="nombre" placeholder="Ingresa tu nombre" value="@nombre" />
+    <input type="text" name="apellido" placeholder="Ingresa tu apellido" value="@apellido" />
+    <input type="email" name="email" placeholder="Ingresa tu correo" value="@email" />
+    <input type="password" name="clave" placeholder="Crea tu contraseña" value="@clave" />
+
+    <input type="submit" value="Registrarme"/>
+</form>

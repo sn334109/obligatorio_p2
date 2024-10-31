@@ -1,0 +1,39 @@
+﻿@using Dominio;
+@model List<Usuario>
+
+<h2>Listado de clientes</h2>
+
+
+@if (Model != null)
+{
+
+    <table class="table table-info">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Saldo Disponible</th>
+        </tr>
+
+        @foreach (Cliente unCliente in Model)
+        {
+            <tr>
+                <td>@unCliente.Id</td>
+                <td>@unCliente.Nombre</td>
+                <td>@unCliente.Apellido</td>
+                <td>@unCliente.Email</td>
+                <td>@unCliente.SaldoDisponible</td>
+            </tr>
+        }
+    </table>
+
+}
+
+@if (ViewBag.error != null)
+{
+    <div class="alert-danger">
+        @ViewBag.error
+    </div>     
+}
+
