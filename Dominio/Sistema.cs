@@ -340,5 +340,24 @@ namespace Dominio
             listaPublicaciones.Add(unaSubasta);
         }
 
+
+        //METODOS PARA OBLIGATORIO 2
+        public Usuario? DevolverUsuario(string email, string clave)
+        {
+            foreach (Usuario unUsuario in listaDeUsuarios)
+            {
+                if (unUsuario.Email == email && unUsuario.Clave == clave) return unUsuario;
+            }
+            return null;
+        }
+        public Usuario? DevolverUsuario(string email)
+        {
+            foreach (Usuario unUsuario in listaDeUsuarios)
+            {
+                if (unUsuario.Email == email) return unUsuario;
+            }
+            return null;
+        }
+
     }
 }

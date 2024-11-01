@@ -8,6 +8,8 @@ namespace WebObligatorioP2
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession();  // Agrega la sesión
+
 
             var app = builder.Build();
 
@@ -21,6 +23,8 @@ namespace WebObligatorioP2
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession(); // Usa la sesión
 
             app.MapControllerRoute(
                 name: "default",

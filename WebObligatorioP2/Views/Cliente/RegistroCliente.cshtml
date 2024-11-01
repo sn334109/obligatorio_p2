@@ -31,13 +31,29 @@
     email = Model.Email;
     clave = Model.Clave;
     saldoDisponible = Model.SaldoDisponible;
-} 
+}
 
-<form method="post">
-    <input type="text" name="nombre" placeholder="Ingresa tu nombre" value="@nombre" />
-    <input type="text" name="apellido" placeholder="Ingresa tu apellido" value="@apellido" />
-    <input type="email" name="email" placeholder="Ingresa tu correo" value="@email" />
-    <input type="password" name="clave" placeholder="Crea tu contraseña" value="@clave" />
+<h2 class="text-center text-white mt-2">Regístrate</h2>
 
-    <input type="submit" value="Registrarme"/>
+
+<form method="post" class="p-4 rounded bg-dark text-light card-registro">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control bg-secondary text-light border-0" name="nombre" id="nombre" placeholder="Ingresa tu nombre" value="@nombre" />
+    </div>
+    <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text" class="form-control bg-secondary text-light border-0" name="apellido" id="apellido" placeholder="Ingresa tu apellido" value="@apellido" />
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input type="email" class="form-control bg-secondary text-light border-0" name="email" id="email" placeholder="Ingresa tu correo" value="@email" />
+    </div>
+    <div class="mb-3">
+        <label for="clave" class="form-label">Contraseña</label>
+        <input type="password" class="form-control bg-secondary text-light border-0" name="clave" id="clave" placeholder="Crea tu contraseña" value="@clave" />
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary w-100" value="Registrarme" />
+    </div>
 </form>

@@ -1,0 +1,42 @@
+﻿@using Dominio
+
+@{
+    string email = "";
+    string clave = "";
+}
+
+
+@if (Model != null)
+{
+    email = Model.Email;
+    clave = Model.Clave;
+}
+
+<div>
+    @if ( ViewBag.Mensaje != null)
+    {
+        <h2 class="alert-danger">@ViewBag.Mensaje</h2>
+    }
+
+    <h2 class="text-center text-white mt-2">Ingresa a tu cuenta</h2>
+
+    <form method="post" class="p-4 rounded bg-dark text-light card-login">
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control bg-secondary text-light border-0" name="email" id="email" placeholder="Ingresa tu correo" value="@email" />
+        </div>
+        <div class="mb-3">
+            <label for="clave" class="form-label">Contraseña</label>
+            <input type="password" class="form-control bg-secondary text-light border-0" name="clave" id="clave" placeholder="Crea tu contraseña" value="@clave" />
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary w-100" value="Iniciar Sesión" />
+        </div>
+    </form>
+
+</div>
+
+
+
+
+
