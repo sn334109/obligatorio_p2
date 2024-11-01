@@ -6,8 +6,8 @@ namespace Dominio
     {
         static int ultimoId;
         int id;
-        string nombre;
-        string apellido;
+        string? nombre;
+        string? apellido;
         string email;
         string clave;
 

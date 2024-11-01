@@ -24,11 +24,23 @@ namespace Dominio
             this.SaldoDisponible = saldoDisponible;
         }
 
-        public void ValidarNombreApellido()
+        public void ValidarCamposVacios()
         {
-            if (Nombre.Length == 0 || Apellido.Length == 0)
+            if (string.IsNullOrEmpty(Nombre))
             {
-                throw new Exception("El nombre y el apellido no pueden estar vacíos");
+                throw new Exception("Debes ingresar tu Nombre.");
+            }
+            if (string.IsNullOrEmpty(Apellido))
+            {
+                throw new Exception("Debes ingresar tu Apellido");
+            }
+            if (string.IsNullOrEmpty(Email))
+            {
+                throw new Exception("Debes ingresar tu Correo Electrònico.");
+            }
+            if (string.IsNullOrEmpty(Clave))
+            {
+                throw new Exception("Debes crear una Clave para tu Cuenta");
             }
         }
 
@@ -42,8 +54,9 @@ namespace Dominio
 
         public void Validar()
         {
-            ValidarNombreApellido();
+            ValidarCamposVacios();
             ValidarSaldoPositivo();
+            //validar Contraseña
         }
 
         public override string ToString()

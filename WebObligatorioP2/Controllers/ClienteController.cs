@@ -27,17 +27,18 @@ namespace WebObligatorioP2.Controllers
         [HttpPost]
         public IActionResult RegistroCliente(Cliente unCliente)
         {
-            //unCliente ??= new Cliente();
             try
             {
                 unSistema.AgregarCliente(unCliente);
                 ViewBag.mensajeExito = "Usuario registrado exitosamente";
+                return View(unCliente);
             }
             catch (Exception ex)
             {
                 ViewBag.error = ex.Message;
+                return View();
             }
-            return View(unCliente);
+           
         }
 
     }
