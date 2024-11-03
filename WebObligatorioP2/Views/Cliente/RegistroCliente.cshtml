@@ -51,9 +51,31 @@
     </div>
     <div class="mb-3">
         <label for="clave" class="form-label">Contraseña</label>
-        <input type="password" class="form-control bg-secondary text-light border-0" name="clave" id="clave" placeholder="Crea tu contraseña" value="@clave" />
+        <div class="input-group">
+            <input type="password" class="form-control bg-secondary text-light border-0" name="clave" id="clave" placeholder="Crea tu contraseña" value="@clave" />
+            <span class="input-group-text bg-secondary text-light border-0" onclick="togglePasswordVisibility()" style="cursor: pointer;">
+                <i id="password-icon" class="bi bi-eye"></i>
+            </span>
+        </div>
     </div>
     <div class="text-center">
         <input type="submit" class="btn btn-primary w-100" value="Registrarme" />
     </div>
 </form>
+
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("clave");
+        var passwordIcon = document.getElementById("password-icon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordIcon.classList.remove("bi-eye");
+            passwordIcon.classList.add("bi-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            passwordIcon.classList.remove("bi-eye-slash");
+            passwordIcon.classList.add("bi-eye");
+        }
+    }
+</script>

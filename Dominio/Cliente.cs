@@ -52,11 +52,28 @@ namespace Dominio
             }
         }
 
+        public void ValidarClave() 
+        {
+            //sean nros y letras
+            foreach (char caracter in Clave) 
+            {
+                if (!char.IsLetterOrDigit(caracter)) 
+                {
+                    throw new Exception("Su contraseña debe ser compuesta por digitos o letras");
+                } 
+            }
+
+            if (Clave.Length < 8)
+            {
+                throw new Exception("Su contraseña debe tener al menos 8 caractéres");
+            }
+        }
+
         public void Validar()
         {
             ValidarCamposVacios();
             ValidarSaldoPositivo();
-            //validar Contraseña
+            ValidarClave();
         }
 
         public override string ToString()

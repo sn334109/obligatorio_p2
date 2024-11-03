@@ -129,16 +129,16 @@ namespace Dominio
         //Precarga de Clientes
         private void PrecargaClientes()
         {
-            AgregarCliente(new Cliente("Federico", "Martinez", "fede@gmail.com", "123456", 2000));
-            AgregarCliente(new Cliente("Ana", "Gonzalez", "ana.gonzalez@gmail.com", "654321", 3000));
-            AgregarCliente(new Cliente("Javier", "Lopez", "javier.lopez@hotmail.com", "abcdef", 1500));
+            AgregarCliente(new Cliente("Federico", "Martinez", "fede@gmail.com", "12345678", 2000));
+            AgregarCliente(new Cliente("Ana", "Gonzalez", "ana.gonzalez@gmail.com", "87654321", 3000));
+            AgregarCliente(new Cliente("Javier", "Lopez", "javier.lopez@hotmail.com", "abcdef123", 1500));
             AgregarCliente(new Cliente("María", "Perez", "maria.perez@yahoo.com", "mariap123", 5000));
             AgregarCliente(new Cliente("Luis", "Ramirez", "luis.ramirez@gmail.com", "ramirez123", 3500));
-            AgregarCliente(new Cliente("Carla", "Fernandez", "carla.f@hotmail.com", "carla456", 2500));
-            AgregarCliente(new Cliente("Pedro", "Sanchez", "pedro.sanchez@yahoo.com", "pedrosan", 4000));
-            AgregarCliente(new Cliente("Sofia", "Gutierrez", "sofia.gutierrez@gmail.com", "sg123456", 4500));
-            AgregarCliente(new Cliente("Ricardo", "Diaz", "ricardo.diaz@gmail.com", "rDiaz2021", 3200));
-            AgregarCliente(new Cliente("Laura", "Mendez", "laura.mendez@hotmail.com", "lauraM", 2700));
+            AgregarCliente(new Cliente("Carla", "Fernandez", "carla.f@hotmail.com", "carla4561111", 2500));
+            AgregarCliente(new Cliente("Pedro", "Sanchez", "pedro.sanchez@yahoo.com", "pedrosan11111", 4000));
+            AgregarCliente(new Cliente("Sofia", "Gutierrez", "sofia.gutierrez@gmail.com", "sg123456111", 4500));
+            AgregarCliente(new Cliente("Ricardo", "Diaz", "ricardo.diaz@gmail.com", "rDiaz202111", 3200));
+            AgregarCliente(new Cliente("Laura", "Mendez", "laura.mendez@hotmail.com", "lauraM1111111", 2700));
         }
 
 
