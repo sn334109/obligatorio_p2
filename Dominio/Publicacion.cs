@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Publicacion
+    public abstract class Publicacion
     {
         static int ultimoId;
         int id;
@@ -63,5 +63,7 @@ namespace Dominio
             ValidarNombre();
         }
 
+        public abstract decimal ObtenerPrecioTotalPublicacion();
+        public abstract string ObtenerTipoPublicacion();
     }
 }

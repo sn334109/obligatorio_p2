@@ -31,7 +31,7 @@ namespace WebObligatorioP2.Controllers
             {
                 unSistema.AgregarCliente(unCliente);
                 ViewBag.mensajeExito = "Usuario registrado exitosamente";
-                return View(unCliente);
+                return RedirectToAction("Login", "Usuario");
             }
             catch (Exception ex)
             {

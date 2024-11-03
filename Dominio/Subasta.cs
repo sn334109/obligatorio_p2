@@ -71,10 +71,29 @@ namespace Dominio
             return $"\n PUBLICACION EN SUBASTA {Estado}: {Nombre.ToUpper()} - Id: {Id}- FECHA DE PUBLICACION: {FechaPublicacion.ToString("dd/MM/yyyy")} \n ARTICULOS DE LA PUBLICACION: {listarNombresArticulosPublicados()} \n LAS OFERTAS SON LAS SIGUIENTES: \n {listarNombresOfertas()} ";
         }
 
-        //devuelve OFERTA
-        public void BuscarMejorOferta()
+        //Obtener mejor oferta
+        public override decimal ObtenerPrecioTotalPublicacion()
         {
+            //sino hay ofertas sale en 0
+            decimal ofertaMax = 0;
+          
+
+            foreach (Oferta unaOferta in listaOfertas)
+            {
+                if (ofertaMax < unaOferta.Monto) 
+                {
+                    ofertaMax = unaOferta.Monto;
+                }
+            }
+
+            return ofertaMax;
+        }
+
+        public override string ObtenerTipoPublicacion()
+        {
+            return "Subasta";
         }
 
     }
 }
+

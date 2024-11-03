@@ -1,0 +1,65 @@
+﻿@using Dominio
+@model List<Publicacion>
+
+<h2>Todas las publicaciones</h2>
+
+
+@if (ViewBag.MensajeExito != null)
+{    
+    <h2 class="text-center alert-danger">@ViewBag.MensajeExito</h2>
+}
+
+@if (ViewBag.error != null)
+{
+    <h2 class="text-center alert-danger">
+        @ViewBag.error
+    </h2>
+}
+
+@if (Model != null)
+{
+
+    <table class="table table-dark table-striped table-hover text-light">
+        <thead class="table-secondary text-dark">
+            <tr>
+                <th scope="col">Tipo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Precio</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Publicacion unaPublicacion in Model)
+            {
+                    <tr>
+                        <td>@unaPublicacion.ObtenerTipoPublicacion()</td>
+                        <td>@unaPublicacion.Nombre</td>
+                        <td>@unaPublicacion.Estado</td>
+                        <td>$ @unaPublicacion.ObtenerPrecioTotalPublicacion()</td>
+                    <td> 
+                        @if (unaPublicacion.Estado == Enums.EstadoPublicacion.ABIERTA)
+                        {
+                            @if (unaPublicacion is Venta)
+                            {
+                                <form asp-controller="Publicacion"  asp-action="RealizarCompra" method="post" class="text-center">
+                                    <input type="hidden" name="idPublicacion" value="@unaPublicacion.Id" />
+                                    <input type="submit" class="btn btn-primary w-70 h-75" value="Comprar" />
+                                </form>
+                            }
+                            else
+                            {
+                                <div class="text-center">
+                                    <input type="button" class="btn-ofertar btn btn-primary w-70 h-75" value="Ofertar" />
+                                </div>
+                            }
+                        }
+                    </td>
+                </tr>
+   
+            }
+        </tbody>
+    </table>
+
+}
+

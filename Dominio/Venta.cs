@@ -33,5 +33,28 @@ namespace Dominio
         {
             return $"\n PUBLICACION A LA VENTA {Estado}: {Nombre.ToUpper()} - Id: {Id}- FECHA DE PUBLICACION: {FechaPublicacion.ToString("dd/MM/yyyy")} \n ARTICULOS DE LA PUBLICACION: {listarNombresArticulosPublicados()}   \n { (ofertaRelampago ? "LA PUBLICACION ESTA EN OFERTA RELAMPAGO" : "" )}";
         }
+
+        public override decimal ObtenerPrecioTotalPublicacion()
+        {
+            decimal precioTotal = 0;
+
+            foreach (Articulo articulo in ArticulosPublicados)
+            {
+                precioTotal += articulo.PrecioVenta; // Sumamos el precio de venta de cada artículo
+            }
+
+            // Si es una oferta relámpago, aplicamos un descuento (ejemplo: 10% de descuento)
+            if (OfertaRelampago)
+            {
+                precioTotal *= 0.8m; // 80% del precio total
+            }
+
+            return precioTotal;
+        }
+
+        public override string ObtenerTipoPublicacion() 
+        {
+            return "Venta";
+        }
     }
 }

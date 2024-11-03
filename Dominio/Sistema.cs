@@ -124,6 +124,16 @@ namespace Dominio
             return aux;
         }
 
+        public List<Publicacion> ObtenerPublicaciones()
+        {
+            if (listaPublicaciones.Count == 0)
+            {
+                throw new Exception("No hay publicaciones para listar");
+            }
+
+            return listaPublicaciones;
+        }
+
 
         // PRECARGA DE ENTIDADES CONTROLADAS POR SISTEMA
         //Precarga de Clientes
@@ -359,5 +369,52 @@ namespace Dominio
             return null;
         }
 
+
+        public Publicacion ObtenerPublicacionPorId(int id) 
+        {
+            foreach (Publicacion unaP in listaPublicaciones )
+            {
+                if (unaP.Id == id) 
+                {
+                    return unaP;
+                }
+            }
+            return null;
+        }
+
+        public Cliente ObtenerUsuarioPorEmail(string emailUsuarioActual) 
+        {
+            foreach (Cliente unUsuario in listaDeUsuarios) 
+            {
+                if (unUsuario.Email == emailUsuarioActual) 
+                {
+                    return unUsuario;
+                }
+            }
+            return null;
+        }
+
+        //Logica de la compra
+        public void RealizarCompra(int id, string emailUsuarioActual) 
+        {
+            Publicacion unaPublicacion = ObtenerPublicacionPorId(id);
+            Cliente usuarioActual = ObtenerUsuarioPorEmail(emailUsuarioActual);
+
+            decimal precioTotal = unaPublicacion.ObtenerPrecioTotalPublicacion();
+
+            if (usuarioActual.SaldoDisponible >= precioTotal) 
+            {
+                unaPublicacion.FechaCierre = DateTime.Now;
+                unaPublicacion.Cliente = usuarioActual;
+                unaPublicacion.UsuarioFinal = usuarioActual;
+                
+                unaPublicacion.Estado = Enums.EstadoPublicacion.CERRADA;
+                usuarioActual.SaldoDisponible -= precioTotal;   
+            } 
+            else 
+            {
+                throw new Exception("No dispone de saldo suficiente para realizar la compra");
+            }
+        }
     }
 }
