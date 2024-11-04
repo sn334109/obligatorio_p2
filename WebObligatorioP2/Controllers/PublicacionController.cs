@@ -31,13 +31,13 @@ namespace WebObligatorioP2.Controllers
             try
             {
                 unSistema.RealizarCompra(idPublicacion, emailUsuarioActual);
-                ViewBag.MensajeExito = "Comprar realizada correctamente";
+                TempData["MensajeExito"] = "Compra realizada correctamente";
                 return RedirectToAction("ListadoPublicaciones");
             }
             catch (Exception unError)
             {
-                ViewBag.error = unError.Message;
-                return View();
+                TempData["Error"] = unError.Message; 
+                return RedirectToAction("ListadoPublicaciones"); // Redirige a la misma vista en caso de error
             }
 
         } 

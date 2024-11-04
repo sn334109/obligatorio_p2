@@ -4,15 +4,15 @@
 <h2>Todas las publicaciones</h2>
 
 
-@if (ViewBag.MensajeExito != null)
-{    
-    <h2 class="text-center alert-danger">@ViewBag.MensajeExito</h2>
+@if (TempData["MensajeExito"] != null)
+{
+    <h2 class="text-center alert-danger">@TempData["MensajeExito"]</h2>
 }
 
-@if (ViewBag.error != null)
+@if (TempData["error"] != null)
 {
     <h2 class="text-center alert-danger">
-        @ViewBag.error
+        @TempData["error"]
     </h2>
 }
 

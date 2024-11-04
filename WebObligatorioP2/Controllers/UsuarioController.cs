@@ -25,11 +25,13 @@ namespace WebObligatorioP2.Controllers
             {
                 //crear sesion
                 HttpContext.Session.SetString("Usuario", unUsuario.Email);
-                if (unUsuario is Cliente) 
+
+                //HttpContext.Session.SetString("Rol", "Cliente");
+                if (unUsuario is Cliente)
                 {
                     HttpContext.Session.SetString("Rol", "Cliente");
                 }
-                else 
+                else
                 {
                     HttpContext.Session.SetString("Rol", "Admin");
                 }
