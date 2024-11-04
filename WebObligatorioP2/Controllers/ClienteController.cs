@@ -30,7 +30,7 @@ namespace WebObligatorioP2.Controllers
             try
             {
                 unSistema.AgregarCliente(unCliente);
-                ViewBag.mensajeExito = "Usuario registrado exitosamente";
+                TempData["mensajeExito"] = "Usuario registrado exitosamente, ahora inicia sesión";
                 return RedirectToAction("Login", "Usuario");
             }
             catch (Exception ex)

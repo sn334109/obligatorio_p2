@@ -91,9 +91,9 @@ namespace Dominio
             List<Usuario> aux = new List<Usuario>();
             foreach (Usuario unUsuario in listaDeUsuarios)
             {
-                if (unUsuario is Cliente)
+                if (unUsuario is Cliente cliente)
                 {
-                    aux.Add(unUsuario);
+                    aux.Add(cliente);
                 }
             }
 
@@ -275,13 +275,13 @@ namespace Dominio
         {
             foreach (Usuario unUsuario in listaDeUsuarios)
             {
-
-                if (unUsuario.Id.Equals(Id))
+                // Verifica si el usuario es un Cliente y si el Id coincide
+                if (unUsuario.Id == Id && unUsuario is Cliente cliente)
                 {
-                    return (Cliente)unUsuario;
+                    return cliente; // Devuelve el objeto como Cliente
                 }
             }
-            return null;
+            throw new Exception($"ObtenerClientePorId() No se encontró un cliente con el ID especificado: {Id}");
         }
 
 
@@ -384,14 +384,14 @@ namespace Dominio
 
         public Cliente ObtenerUsuarioPorEmail(string emailUsuarioActual) 
         {
-            foreach (Cliente unUsuario in listaDeUsuarios) 
+            foreach (Usuario unUsuario in listaDeUsuarios) 
             {
-                if (unUsuario.Email == emailUsuarioActual) 
+                if (unUsuario.Email == emailUsuarioActual && unUsuario is Cliente cliente) 
                 {
-                    return unUsuario;
+                    return cliente;
                 }
             }
-            return null;
+            throw new Exception("ObtenerUsuarioPorEmail() - no es un cliente");
         }
 
         //Logica de la compra

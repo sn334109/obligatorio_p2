@@ -6,6 +6,11 @@
 }
 
 
+@if (TempData["mensajeExito"] != null)
+{
+    <h2 class="alert-success text-center">@TempData["mensajeExito"]</h2>
+}
+
 @if (Model != null)
 {
     email = Model.Email;

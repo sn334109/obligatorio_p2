@@ -26,14 +26,19 @@ namespace WebObligatorioP2.Controllers
                 //crear sesion
                 HttpContext.Session.SetString("Usuario", unUsuario.Email);
 
-                //HttpContext.Session.SetString("Rol", "Cliente");
                 if (unUsuario is Cliente)
                 {
                     HttpContext.Session.SetString("Rol", "Cliente");
                 }
-                else
+                else if (unUsuario is Admin)
                 {
                     HttpContext.Session.SetString("Rol", "Admin");
+                }
+                else
+                {
+                    // Manejo de error si el usuario no es ni Cliente ni Admin
+                    ViewBag.Mensaje = "El usuario no tiene un rol asignado.";
+                    return View("Login");
                 }
                 return RedirectToAction("VistaUsuario", new { email = unUsuario.Email });
             }
