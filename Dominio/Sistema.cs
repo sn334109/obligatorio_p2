@@ -370,11 +370,11 @@ namespace Dominio
         }
 
 
-        public Publicacion ObtenerPublicacionPorId(int id) 
+        public Publicacion ObtenerPublicacionPorId(int id)
         {
-            foreach (Publicacion unaP in listaPublicaciones )
+            foreach (Publicacion unaP in listaPublicaciones)
             {
-                if (unaP.Id == id) 
+                if (unaP.Id == id)
                 {
                     return unaP;
                 }
@@ -382,11 +382,11 @@ namespace Dominio
             return null;
         }
 
-        public Cliente ObtenerUsuarioPorEmail(string emailUsuarioActual) 
+        public Cliente ObtenerUsuarioPorEmail(string emailUsuarioActual)
         {
-            foreach (Usuario unUsuario in listaDeUsuarios) 
+            foreach (Usuario unUsuario in listaDeUsuarios)
             {
-                if (unUsuario.Email == emailUsuarioActual && unUsuario is Cliente cliente) 
+                if (unUsuario.Email == emailUsuarioActual && unUsuario is Cliente cliente)
                 {
                     return cliente;
                 }
@@ -395,23 +395,23 @@ namespace Dominio
         }
 
         //Logica de la compra
-        public void RealizarCompra(int id, string emailUsuarioActual) 
+        public void RealizarCompra(int id, string emailUsuarioActual)
         {
             Publicacion unaPublicacion = ObtenerPublicacionPorId(id);
             Cliente usuarioActual = ObtenerUsuarioPorEmail(emailUsuarioActual);
 
             decimal precioTotal = unaPublicacion.ObtenerPrecioTotalPublicacion();
 
-            if (usuarioActual.SaldoDisponible >= precioTotal) 
+            if (usuarioActual.SaldoDisponible >= precioTotal)
             {
                 unaPublicacion.FechaCierre = DateTime.Now;
                 unaPublicacion.Cliente = usuarioActual;
                 unaPublicacion.UsuarioFinal = usuarioActual;
-                
+
                 unaPublicacion.Estado = Enums.EstadoPublicacion.CERRADA;
-                usuarioActual.SaldoDisponible -= precioTotal;   
-            } 
-            else 
+                usuarioActual.SaldoDisponible -= precioTotal;
+            }
+            else
             {
                 throw new Exception("No dispone de saldo suficiente para realizar la compra");
             }
@@ -461,9 +461,33 @@ namespace Dominio
         }
 
 
-        //public void CargarSaldo() 
+        public void CargarSaldo(string emailUsuarioActual, decimal saldoACargar)
+        {
+            Cliente usuarioActual = ObtenerUsuarioPorEmail(emailUsuarioActual);
+
+            if (saldoACargar <= 0)
+            {
+                throw new Exception("Ingresa un valor positivo");
+            }
+
+            usuarioActual.SaldoDisponible += saldoACargar;
+        }
+
+        //public List<Publicacion> PublicacionesPorUsuario(string emailUsuarioActual)
         //{
-        
+        //    Cliente usuarioActual = ObtenerUsuarioPorEmail(emailUsuarioActual);
+        //    List<Publicacion> aux = new List<Publicacion>();
+
+        //    foreach (Publicacion unaP in listaPublicaciones)
+        //    {
+        //        if (unaP.Cliente.Email == emailUsuarioActual) 
+        //        {
+        //            aux.Add(unaP);
+        //        } 
+        //    }
+
+        //    return aux;
+
         //}
     }
 }

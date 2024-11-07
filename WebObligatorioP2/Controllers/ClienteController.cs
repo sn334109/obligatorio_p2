@@ -6,6 +6,7 @@ namespace WebObligatorioP2.Controllers
     public class ClienteController : Controller
     {
         Sistema unSistema = Sistema.Instancia;
+        
         public IActionResult ListadoClientes()
         {
             try
@@ -21,6 +22,7 @@ namespace WebObligatorioP2.Controllers
 
         public IActionResult MiCuenta()
         {
+            
             string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
             return View(unSistema.ObtenerUsuarioPorEmail(emailUsuarioActual));
         }
@@ -53,22 +55,23 @@ namespace WebObligatorioP2.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult CargarSaldo(decimal montoSaldo)
-        //{
-        //    try
-        //    {
-        //        string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
-        //        unSistema.CargarSaldo(emailUsuarioActual, montoSaldo);
-        //        RedirectToAction("MiCuenta");
-        //    }
-        //    catch (Exception unError) 
-        //    {
-        //        ViewBag.error = unError.Message;
-        //        return View();
-        //    }
+        [HttpPost]
+        public IActionResult CargarSaldo(decimal montoSaldo)
+        {
+            try
+            {
+                string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
+                unSistema.CargarSaldo(emailUsuarioActual, montoSaldo);
+                TempData["mensajeExito"] = "Su saldo fue incrementado correctamente";
+                return RedirectToAction("MiCuenta");
+            }
+            catch (Exception ex)
+            {
+                TempData["mensajeExito"] = "!Debe ingresar un valor positivo¡ Intentelo nuevamente.";
+                return RedirectToAction("MiCuenta");
+            }
 
-        //}
+        }
 
 
     }

@@ -8,6 +8,13 @@
 }
 
 
+@if (TempData["mensajeExito"] != null)
+{
+    <div class="text-center alert-success">
+        <h4>@TempData["mensajeExito"]</h4>
+    </div>
+}
+
 <h1 class="text-center fw-bold py-4">Mi Cuenta</h1>
 
 <div class="text-center">
@@ -18,7 +25,7 @@
 
     <h3 class="pt-2">Cargar Saldo</h3>
     <form asp-controller="Cliente" asp-action="CargarSaldo" method="post" class="text-center">
-        <strong>$</strong> <input style="width: 10%" name="montoSaldo" type="text" class="form-text fw-bold" placeholder="ingrese saldo a cargar" required />
+        <strong>$</strong> <input style="width: 10%" name="montoSaldo" type="text" class="form-text fw-bold" placeholder="Importe a cargar" required />
         <input type="submit" class="btn-ofertar btn btn-primary w-70 h-75" value="Cargar" />
     </form>
 </div>
@@ -35,6 +42,7 @@
             </tr>
         </thead>
         <tbody>
+
 
         </tbody>
     </table>
