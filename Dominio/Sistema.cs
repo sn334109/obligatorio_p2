@@ -416,5 +416,54 @@ namespace Dominio
                 throw new Exception("No dispone de saldo suficiente para realizar la compra");
             }
         }
+
+
+        //Metodo agregado obligatorio 2
+        //Logica de la oferta
+        public void RealizarOferta(int id, string emailUsuarioActual, decimal valorOferta)
+        {
+            Publicacion unaPublicacion = ObtenerPublicacionPorId(id);
+            Cliente usuarioActual = ObtenerUsuarioPorEmail(emailUsuarioActual);
+
+
+            if (valorOferta <= 0)
+            {
+                throw new Exception("Ingresa un valor positivo");
+            }
+
+            if (usuarioActual == null)
+            {
+                throw new Exception("No se encontró al cliente actual.");
+            }
+
+
+            if (usuarioActual.SaldoDisponible < valorOferta)
+            {
+                throw new Exception("No dispone de saldo suficiente para realizar esta oferta");
+            }
+
+            Oferta nuevaOferta = new Oferta(usuarioActual, valorOferta, DateTime.Now);
+
+
+            if (unaPublicacion is Subasta subasta)
+            {
+                if (subasta.ComprobarExistenciaOfertaDeClientePorId(usuarioActual.Id))// si el usaurio se encuentra
+                {
+                    throw new Exception("Ya realizaste una oferta en esta Subasta");
+                }
+
+                subasta.CrearOferta(nuevaOferta);
+            }
+
+            //el saldo se modifica cuando el administrador finaliza la subasta
+            //usuarioActual.SaldoDisponible -= valorOferta;
+
+        }
+
+
+        //public void CargarSaldo() 
+        //{
+        
+        //}
     }
 }

@@ -19,6 +19,13 @@ namespace WebObligatorioP2.Controllers
             }
         }
 
+        public IActionResult MiCuenta()
+        {
+            string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
+            return View(unSistema.ObtenerUsuarioPorEmail(emailUsuarioActual));
+        }
+
+
         public IActionResult RegistroCliente() 
         {
             return View();
@@ -40,6 +47,29 @@ namespace WebObligatorioP2.Controllers
             }
            
         }
+
+        public IActionResult CargarSaldo() 
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public IActionResult CargarSaldo(decimal montoSaldo)
+        //{
+        //    try
+        //    {
+        //        string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
+        //        unSistema.CargarSaldo(emailUsuarioActual, montoSaldo);
+        //        RedirectToAction("MiCuenta");
+        //    }
+        //    catch (Exception unError) 
+        //    {
+        //        ViewBag.error = unError.Message;
+        //        return View();
+        //    }
+
+        //}
+
 
     }
 }

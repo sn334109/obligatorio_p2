@@ -49,9 +49,11 @@
                             }
                             else
                             {
-                                <div class="text-center">
-                                    <input type="button" class="btn-ofertar btn btn-primary w-70 h-75" value="Ofertar" />
-                                </div>
+                                <form asp-controller="Publicacion" asp-action="RealizarOferta" method="post" class="text-center">
+                                    <input type="hidden" name="idPublicacion" value="@unaPublicacion.Id" />  
+                                    <strong>$</strong> <input style="width: 20%" name="valorOferta" type="text" class="form-text fw-bold" placeholder="ingrese su oferta" required/>
+                                    <input type="submit" class="btn-ofertar btn btn-primary w-70 h-75" value="Ofertar" />
+                                </form>
                             }
                         }
                     </td>

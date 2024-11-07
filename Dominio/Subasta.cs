@@ -89,9 +89,23 @@ namespace Dominio
             return ofertaMax;
         }
 
+
         public override string ObtenerTipoPublicacion()
         {
             return "Subasta";
+        }
+
+
+        public bool ComprobarExistenciaOfertaDeClientePorId(int id)
+        {
+            foreach (Oferta unaOferta in listaOfertas) 
+            {
+                if (unaOferta.Cliente.Id == id)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }

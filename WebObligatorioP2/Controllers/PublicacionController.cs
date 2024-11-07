@@ -40,6 +40,32 @@ namespace WebObligatorioP2.Controllers
                 return RedirectToAction("ListadoPublicaciones"); // Redirige a la misma vista en caso de error
             }
 
-        } 
+        }
+
+        public IActionResult RealizarOferta()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RealizarOferta(int idPublicacion, decimal valorOferta) {
+            string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
+            
+            try
+            {
+                unSistema.RealizarOferta(idPublicacion, emailUsuarioActual, valorOferta);
+                TempData["MensajeExito"] = $"Oferta de ${valorOferta} realizada correctamente";
+                return RedirectToAction("ListadoPublicaciones");
+            }
+            catch (Exception unError)
+            {
+                TempData["Error"] = unError.Message;
+                return RedirectToAction("ListadoPublicaciones"); // Redirige a la misma vista en caso de error
+            }
+        
+        }
+
+
+
     }
 }
