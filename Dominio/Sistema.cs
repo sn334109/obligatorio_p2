@@ -473,21 +473,27 @@ namespace Dominio
             usuarioActual.SaldoDisponible += saldoACargar;
         }
 
-        //public List<Publicacion> PublicacionesPorUsuario(string emailUsuarioActual)
-        //{
-        //    Cliente usuarioActual = ObtenerUsuarioPorEmail(emailUsuarioActual);
-        //    List<Publicacion> aux = new List<Publicacion>();
+        public List<Publicacion> PublicacionesPorUsuario(string emailUsuarioActual)
+        {
+            List<Publicacion> aux = new List<Publicacion>();
 
-        //    foreach (Publicacion unaP in listaPublicaciones)
-        //    {
-        //        if (unaP.Cliente.Email == emailUsuarioActual) 
-        //        {
-        //            aux.Add(unaP);
-        //        } 
-        //    }
+            foreach (Publicacion unaP in listaPublicaciones)
+            {
+                if (unaP.Cliente != null && unaP.Cliente.Email == emailUsuarioActual)
+                {
+                    aux.Add(unaP);
+                }
+            }
 
-        //    return aux;
+            return aux;
 
-        //}
+        }
+
+        public decimal PrecioDeUnaPublicacionPorId(int id) 
+        { 
+            Publicacion unaPublicacion = ObtenerPublicacionPorId(id);
+            decimal precio = unaPublicacion.ObtenerPrecioTotalPublicacion();
+            return precio;
+        }
     }
 }

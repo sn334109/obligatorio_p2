@@ -7,6 +7,7 @@ namespace WebObligatorioP2.Controllers
     {
         Sistema unSistema = Sistema.Instancia;
         
+
         public IActionResult ListadoClientes()
         {
             try
@@ -22,9 +23,15 @@ namespace WebObligatorioP2.Controllers
 
         public IActionResult MiCuenta()
         {
-            
+            ViewBag.Sistema = unSistema;
+
+
             string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
+            List<Publicacion> lista = unSistema.PublicacionesPorUsuario(emailUsuarioActual);
+            ViewBag.listadoPublicacionesPorUsuario = lista;
             return View(unSistema.ObtenerUsuarioPorEmail(emailUsuarioActual));
+
+            
         }
 
 

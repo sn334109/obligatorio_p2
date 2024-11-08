@@ -1,10 +1,15 @@
 ﻿@using Dominio
 @model Cliente
 
+@{
+    
+}
+
+
 
 @if (ViewBag != null)
 {
-    <h2 class="text-center text-danger">@ViewBag.error</h2>    
+    <h2 class="text-center text-danger">@ViewBag.error</h2>
 }
 
 
@@ -30,6 +35,9 @@
     </form>
 </div>
 
+
+<h2 class="text-center text-danger">@ViewBag.noHayPublicaciones</h2>
+
 <div class="text-center">
     <h3 class="fw-bold py-2">Mis compras</h3>
 
@@ -37,13 +45,34 @@
         <thead class="table-secondary text-dark">
             <tr>
                 <th scope="col">Nombre</th>
-                <th scope="col">Articulos</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Publicación</th>
                 <th scope="col">Precio Total</th>
             </tr>
         </thead>
         <tbody>
+            @if (ViewBag.listadoPublicacionesPorUsuario != null && ViewBag.listadoPublicacionesPorUsuario.Count > 0)
+            {
+                Sistema? unSistema = ViewBag.Sistema as Dominio.Sistema;
 
+                @foreach (Publicacion unaP in ViewBag.listadoPublicacionesPorUsuario)
+                {
+                    <tr>
+                        <td>@unaP.Cliente.Nombre</td>
+                        <td>@unaP.Cliente.Apellido</td>
+                        <td>@unaP.Nombre</td>
+                        <td>@unSistema.PrecioDeUnaPublicacionPorId(unaP.Id)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
 
+                    <td colspan="4" class="text-center text-danger"><h2>No tienes compras realizadas.</h2></td>
+                    
+                </tr>
+            }
         </tbody>
     </table>
 </div>
