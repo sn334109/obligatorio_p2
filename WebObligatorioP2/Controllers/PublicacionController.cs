@@ -10,6 +10,11 @@ namespace WebObligatorioP2.Controllers
         {
             try
             {
+                string emailUsuarioActual = HttpContext.Session.GetString("Usuario"); 
+                Cliente cliente = unSistema.ObtenerUsuarioPorEmail(emailUsuarioActual); 
+                int clienteId = cliente.Id;
+                ViewBag.ClienteId = clienteId;
+
                 return View(unSistema.ObtenerPublicaciones());
             }
             catch (Exception unError)

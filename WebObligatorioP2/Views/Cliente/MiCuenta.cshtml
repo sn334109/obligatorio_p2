@@ -1,15 +1,9 @@
 ﻿@using Dominio
 @model Cliente
 
-@{
-    
-}
-
-
-
 @if (ViewBag != null)
 {
-    <h2 class="text-center text-danger">@ViewBag.error</h2>
+    <h2 class="text-center alert-danger">@ViewBag.error</h2>
 }
 
 
@@ -53,7 +47,6 @@
         <tbody>
             @if (ViewBag.listadoPublicacionesPorUsuario != null && ViewBag.listadoPublicacionesPorUsuario.Count > 0)
             {
-                Sistema? unSistema = ViewBag.Sistema as Dominio.Sistema;
 
                 @foreach (Publicacion unaP in ViewBag.listadoPublicacionesPorUsuario)
                 {
@@ -61,7 +54,7 @@
                         <td>@unaP.Cliente.Nombre</td>
                         <td>@unaP.Cliente.Apellido</td>
                         <td>@unaP.Nombre</td>
-                        <td>@unSistema.PrecioDeUnaPublicacionPorId(unaP.Id)</td>
+                        <td>@unaP.ObtenerPrecioTotalPublicacion()</td>
                     </tr>
                 }
             }

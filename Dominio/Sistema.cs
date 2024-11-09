@@ -442,6 +442,11 @@ namespace Dominio
                 throw new Exception("No dispone de saldo suficiente para realizar esta oferta");
             }
 
+            if (unaPublicacion.ObtenerPrecioTotalPublicacion() >= valorOferta ) 
+            {
+                throw new Exception("Tu oferta debe ser mayor que la oferta más alta");
+            }
+
             Oferta nuevaOferta = new Oferta(usuarioActual, valorOferta, DateTime.Now);
 
 
