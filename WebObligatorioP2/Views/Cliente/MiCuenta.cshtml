@@ -40,6 +40,7 @@
             <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Publicación</th>
                 <th scope="col">Precio Total</th>
             </tr>
@@ -53,6 +54,7 @@
                     <tr>
                         <td>@unaP.Cliente.Nombre</td>
                         <td>@unaP.Cliente.Apellido</td>
+                        <td>@unaP.ObtenerTipoPublicacion()</td>
                         <td>@unaP.Nombre</td>
                         <td>@unaP.ObtenerPrecioTotalPublicacion()</td>
                     </tr>
@@ -62,7 +64,7 @@
             {
                 <tr>
 
-                    <td colspan="4" class="text-center text-danger"><h2>No tienes compras realizadas.</h2></td>
+                    <td colspan="5" class="text-center text-danger"><h2>No tienes compras realizadas.</h2></td>
                     
                 </tr>
             }

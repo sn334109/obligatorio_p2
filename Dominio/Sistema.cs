@@ -442,7 +442,7 @@ namespace Dominio
                 throw new Exception("No dispone de saldo suficiente para realizar esta oferta");
             }
 
-            if (unaPublicacion.ObtenerPrecioTotalPublicacion() >= valorOferta ) 
+            if (unaPublicacion.ObtenerPrecioTotalPublicacion() >= valorOferta)
             {
                 throw new Exception("Tu oferta debe ser mayor que la oferta más alta");
             }
@@ -459,9 +459,6 @@ namespace Dominio
 
                 subasta.CrearOferta(nuevaOferta);
             }
-
-            //el saldo se modifica cuando el administrador finaliza la subasta
-            //usuarioActual.SaldoDisponible -= valorOferta;
 
         }
 
@@ -494,11 +491,45 @@ namespace Dominio
 
         }
 
-        public decimal PrecioDeUnaPublicacionPorId(int id) 
-        { 
-            Publicacion unaPublicacion = ObtenerPublicacionPorId(id);
-            decimal precio = unaPublicacion.ObtenerPrecioTotalPublicacion();
-            return precio;
+        public List<Subasta> ObtenerListaSubastas()
+        {
+            List<Subasta> subastas = new List<Subasta>();
+
+            foreach (Publicacion unaPublicacion in listaPublicaciones)
+            {
+                if (unaPublicacion is Subasta subasta)
+                {
+                    subastas.Add(subasta);
+                }
+            }
+
+            if (subastas.Count() == 0)
+            {
+                throw new Exception("No se encontraron subastas para listar");
+            }
+
+            return subastas;
+        }
+
+        public void CerrarSubasta(int idSubasta) 
+        {
+            Publicacion laPublicacion = ObtenerPublicacionPorId(idSubasta);
+            if (laPublicacion is Subasta laSubasta) 
+            {
+                Cliente usuarioFinal = laSubasta.BuscarUsuarioFinal();
+                if (usuarioFinal == null) 
+                {
+                    throw new Exception("No se pudo cerrar la subasta, no hay ofertas válidas");
+                }
+
+                //Logica de cerrar la subasta
+                usuarioFinal.SaldoDisponible -= laSubasta.ObtenerPrecioTotalPublicacion();
+                laSubasta.Estado = Enums.EstadoPublicacion.CERRADA;
+                laSubasta.UsuarioFinal = usuarioFinal;
+                laSubasta.Cliente = usuarioFinal;
+                laSubasta.FechaCierre = DateTime.Now;
+            }
+
         }
     }
 }

@@ -1,0 +1,54 @@
+﻿@using Dominio
+@model List<Subasta>
+
+<h2 class="text-center">Listado de subastas</h2>
+
+@if(TempData["error"] != null)
+{
+    <h2 class="text-danger text-center">@TempData["error"]</h2>
+}
+
+@if (TempData["mensajeExito"] != null)
+{
+    <h2 class="text-success text-center">@TempData["mensajeExito"]</h2>
+}
+
+
+<table class="table table-dark table-striped table-hover text-light">
+    <thead class="table-secondary text-dark">
+        <tr>
+            <th scope="col">Tipo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha Publicación</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Precio</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Subasta unaSubasta in Model)
+        {
+            <tr>
+                <td>Subasta</td>
+                <td>@unaSubasta.Nombre</td>
+                <td>@unaSubasta.FechaPublicacion</td>
+                <td>@unaSubasta.Estado</td>
+                <td>@unaSubasta.ObtenerPrecioTotalPublicacion()</td>
+                <td>
+                    <form asp-controller="Usuario" asp-action="CerrarSubasta" method="post">
+                        <input type="hidden" name="idSubasta" value="@unaSubasta.Id" />
+                        @if(unaSubasta.Estado != Enums.EstadoPublicacion.ABIERTA)
+                        {
+                            <p class="text-danger">Subasta finalizada <span class="text-warning">(@unaSubasta?.Cliente?.Nombre @unaSubasta?.Cliente?.Apellido)</span> </p>
+
+                        } else
+                        {
+                             <button class="btn-danger" type="submit">Cerrar subasta</button>
+                        }
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

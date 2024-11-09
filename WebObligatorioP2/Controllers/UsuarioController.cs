@@ -13,15 +13,15 @@ namespace WebObligatorioP2.Controllers
             return View(unUsuario);
         }
 
-        public IActionResult Login() 
+        public IActionResult Login()
         {
-            return View(); 
+            return View();
         }
         [HttpPost]
         public IActionResult Login(string email, string clave)
         {
             Usuario? unUsuario = unSistema.DevolverUsuario(email, clave);
-            if (unUsuario != null) 
+            if (unUsuario != null)
             {
                 //crear sesion
                 HttpContext.Session.SetString("Usuario", unUsuario.Email);
@@ -57,5 +57,40 @@ namespace WebObligatorioP2.Controllers
             return RedirectToAction("Login");
         }
 
+
+        public IActionResult ListadoSubastas()
+        {
+            try
+            {
+                List<Subasta> lista = unSistema.ObtenerListaSubastas();
+                lista.Sort();
+                return View(lista);
+            }
+            catch (Exception unError)
+            {
+                TempData["error"] = unError;
+                return View();
+            }
+        }
+
+        public IActionResult CerrarSubasta() { return View(); }
+
+
+        [HttpPost]
+        public IActionResult CerrarSubasta(int idSubasta) 
+        {
+            try
+            {
+                unSistema.CerrarSubasta(idSubasta);
+                TempData["mensajeExito"] = "Subasta finalizada con éxito";
+                return RedirectToAction("ListadoSubastas");
+            }
+            catch (Exception unError)
+            {
+                TempData["error"] = unError.Message;
+                return RedirectToAction("ListadoSubastas");
+            }
+            
+        }
     }
 }

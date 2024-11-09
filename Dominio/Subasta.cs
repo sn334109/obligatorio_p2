@@ -7,7 +7,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dominio
 {
-    public class Subasta : Publicacion
+    public class Subasta : Publicacion, IComparable<Subasta>
     {
         static Sistema unSistema = Sistema.Instancia;
         List<Oferta> listaOfertas = new List<Oferta>();
@@ -106,6 +106,30 @@ namespace Dominio
                 }
             }
             return false;
+        }
+
+
+        public int CompareTo(Subasta unaSubasta)
+        {
+            if (unaSubasta == null) return 1; 
+            return this.FechaPublicacion.CompareTo(unaSubasta.FechaPublicacion);
+        }
+
+        public Cliente BuscarUsuarioFinal() 
+        {
+            Cliente usuarioFinal = null;
+            decimal valorAux = 0;
+
+            foreach (Oferta unaOferta in listaOfertas) 
+            {
+                if (unaOferta.Monto > valorAux && unaOferta.Cliente.SaldoDisponible >= unaOferta.Monto) 
+                {
+                    valorAux = unaOferta.Monto;
+                    usuarioFinal = unaOferta.Cliente;
+                }
+            }
+
+            return usuarioFinal;
         }
 
     }
