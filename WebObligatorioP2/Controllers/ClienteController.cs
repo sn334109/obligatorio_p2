@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebObligatorioP2.Controllers
@@ -6,10 +7,22 @@ namespace WebObligatorioP2.Controllers
     public class ClienteController : Controller
     {
         Sistema unSistema = Sistema.Instancia;
-        
+
 
         public IActionResult ListadoClientes()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return Redirect("/Usuario/Login");
+            }
+            else
+            {
+                if (HttpContext.Session.GetString("Rol") == "Cliente") 
+                {
+                    return RedirectToAction("AccessDenied", "Error");
+                }
+            }
+
             try
             {
                 return View(unSistema.ObtenerClientes());

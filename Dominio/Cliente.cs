@@ -8,7 +8,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dominio
 {
-    public class Cliente : Usuario
+    public class Cliente : Usuario, IValidable
     {
         decimal saldoDisponible;
 

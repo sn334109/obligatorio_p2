@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public abstract class Publicacion
+    public abstract class Publicacion: IValidable
     {
         static int ultimoId;
         int id;

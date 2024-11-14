@@ -6,14 +6,14 @@
 
 @if (TempData["MensajeExito"] != null)
 {
-    <h2 class="text-center alert-success">@TempData["MensajeExito"]</h2>
+    <h3 class="text-center text-success">@TempData["MensajeExito"]</h3>
 }
 
 @if (TempData["error"] != null)
 {
-    <h2 class="text-center alert-danger">
+    <h3 class="text-center text-danger">
         @TempData["error"]
-    </h2>
+    </h3>
 }
 
 

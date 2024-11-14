@@ -8,6 +8,17 @@ namespace WebObligatorioP2.Controllers
         Sistema unSistema = Sistema.Instancia;
         public IActionResult ListadoPublicaciones()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return Redirect("/Usuario/Login");
+            }
+            else
+            {
+                if (HttpContext.Session.GetString("Rol") =="Admin")
+                {
+                    return RedirectToAction("AccessDenied", "Error");
+                }
+            }
             try
             {
                 string emailUsuarioActual = HttpContext.Session.GetString("Usuario"); 

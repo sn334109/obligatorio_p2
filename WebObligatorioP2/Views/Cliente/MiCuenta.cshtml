@@ -3,15 +3,13 @@
 
 @if (ViewBag != null)
 {
-    <h2 class="text-center alert-danger">@ViewBag.error</h2>
+    <h3 class="text-center text-danger">@ViewBag.error</h3>
 }
 
 
 @if (TempData["mensajeExito"] != null)
 {
-    <div class="text-center alert-success">
-        <h4>@TempData["mensajeExito"]</h4>
-    </div>
+        <h3 class="text-success text-ceter">@TempData["mensajeExito"]</h3>
 }
 
 <h1 class="text-center fw-bold py-4">Mi Cuenta</h1>

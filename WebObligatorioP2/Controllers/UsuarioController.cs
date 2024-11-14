@@ -60,6 +60,17 @@ namespace WebObligatorioP2.Controllers
 
         public IActionResult ListadoSubastas()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return Redirect("/Usuario/Login");
+            }
+            else
+            {
+                if (HttpContext.Session.GetString("Rol") == "Cliente")
+                {
+                    return RedirectToAction("AccessDenied", "Error");
+                }
+            }
             try
             {
                 List<Subasta> lista = unSistema.ObtenerListaSubastas();

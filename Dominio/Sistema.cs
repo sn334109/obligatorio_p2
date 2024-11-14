@@ -522,6 +522,12 @@ namespace Dominio
                     throw new Exception("No se pudo cerrar la subasta, no hay ofertas válidas");
                 }
 
+                //Control dirigida a la precarga automatica de ofertas
+                if (usuarioFinal.SaldoDisponible < laSubasta.ObtenerPrecioTotalPublicacion())
+                {
+                    throw new Exception("No se pudo cerrar la subasta, no hay ofertas válidas");
+                }
+
                 //Logica de cerrar la subasta
                 usuarioFinal.SaldoDisponible -= laSubasta.ObtenerPrecioTotalPublicacion();
                 laSubasta.Estado = Enums.EstadoPublicacion.CERRADA;
