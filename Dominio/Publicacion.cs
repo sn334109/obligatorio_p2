@@ -65,5 +65,7 @@ namespace Dominio
 
         public abstract decimal ObtenerPrecioTotalPublicacion();
         public abstract string ObtenerTipoPublicacion();
+
+        public abstract void CerrarPublicacion(string emailUsuarioActual);
     }
 }

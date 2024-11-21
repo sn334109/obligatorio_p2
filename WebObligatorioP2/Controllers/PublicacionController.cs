@@ -43,7 +43,8 @@ namespace WebObligatorioP2.Controllers
         public IActionResult RealizarCompra(int idPublicacion)
         {
             string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
-
+            //Cliente clienteActualizado = unSistema.ObtenerUsuarioPorEmail(emailUsuarioActual); // Logica para mostrar el SaldoDisponible
+            //HttpContext.Session.SetString("SaldoDisponible", clienteActualizado.SaldoDisponible.ToString());
             try
             {
                 unSistema.RealizarCompra(idPublicacion, emailUsuarioActual);

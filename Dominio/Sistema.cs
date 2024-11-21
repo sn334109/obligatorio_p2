@@ -155,8 +155,8 @@ namespace Dominio
         //Precarga Administradores
         private void PrecargaUsuariosAdmin()
         {
-            AgregarAdmin(new Admin("Cesar", "Martinez", "cesar@gmail.com", "c123456"));
-            AgregarAdmin(new Admin("Santiago", "Neira", "santi@gmail.com", "s123456"));
+            AgregarAdmin(new Admin("Cesar", "Martinez", "cesar@gmail.com", "c12345678"));
+            AgregarAdmin(new Admin("Santiago", "Neira", "santi@gmail.com", "s12345678"));
         }
 
 
@@ -394,29 +394,6 @@ namespace Dominio
             throw new Exception("ObtenerUsuarioPorEmail() - no es un cliente");
         }
 
-        //Logica de la compra
-        public void RealizarCompra(int id, string emailUsuarioActual)
-        {
-            Publicacion unaPublicacion = ObtenerPublicacionPorId(id);
-            Cliente usuarioActual = ObtenerUsuarioPorEmail(emailUsuarioActual);
-
-            decimal precioTotal = unaPublicacion.ObtenerPrecioTotalPublicacion();
-
-            if (usuarioActual.SaldoDisponible >= precioTotal)
-            {
-                unaPublicacion.FechaCierre = DateTime.Now;
-                unaPublicacion.Cliente = usuarioActual;
-                unaPublicacion.UsuarioFinal = usuarioActual;
-
-                unaPublicacion.Estado = Enums.EstadoPublicacion.CERRADA;
-                usuarioActual.SaldoDisponible -= precioTotal;
-            }
-            else
-            {
-                throw new Exception("No dispone de saldo suficiente para realizar la compra");
-            }
-        }
-
 
         //Metodo agregado obligatorio 2
         //Logica de la oferta
@@ -511,31 +488,22 @@ namespace Dominio
             return subastas;
         }
 
-        public void CerrarSubasta(int idSubasta) 
+        //METODOS DE CIERRE DE PUBLICACION
+        public void RealizarCompra(int idPublicacion, string emailUsuarioActual)
         {
-            Publicacion laPublicacion = ObtenerPublicacionPorId(idSubasta);
-            if (laPublicacion is Subasta laSubasta) 
-            {
-                Cliente usuarioFinal = laSubasta.BuscarUsuarioFinal();
-                if (usuarioFinal == null) 
-                {
-                    throw new Exception("No se pudo cerrar la subasta, no hay ofertas válidas");
-                }
+            Publicacion unaPublicacion = ObtenerPublicacionPorId(idPublicacion);
 
-                //Control dirigida a la precarga automatica de ofertas
-                if (usuarioFinal.SaldoDisponible < laSubasta.ObtenerPrecioTotalPublicacion())
-                {
-                    throw new Exception("No se pudo cerrar la subasta, no hay ofertas válidas");
-                }
-
-                //Logica de cerrar la subasta
-                usuarioFinal.SaldoDisponible -= laSubasta.ObtenerPrecioTotalPublicacion();
-                laSubasta.Estado = Enums.EstadoPublicacion.CERRADA;
-                laSubasta.UsuarioFinal = usuarioFinal;
-                laSubasta.Cliente = usuarioFinal;
-                laSubasta.FechaCierre = DateTime.Now;
-            }
-
+            unaPublicacion.CerrarPublicacion(emailUsuarioActual);
         }
+
+        public void CerrarSubasta(int idPublicacion, string emailUsuarioActual)
+        {
+            Publicacion unaPublicacion = ObtenerPublicacionPorId(idPublicacion);
+
+            unaPublicacion.CerrarPublicacion(emailUsuarioActual);
+        }
+
+
+
     }
 }

@@ -132,6 +132,31 @@ namespace Dominio
             return usuarioFinal;
         }
 
+
+        public override void CerrarPublicacion(string emailUsuarioActual)
+        {
+  
+                Cliente usuarioFinal = BuscarUsuarioFinal();
+                if (usuarioFinal == null)
+                {
+                    throw new Exception("No se pudo cerrar la subasta, no hay ofertas válidas");
+                }
+
+                //Control dirigida a la precarga automatica de ofertas
+                if (usuarioFinal.SaldoDisponible < ObtenerPrecioTotalPublicacion())
+                {
+                    throw new Exception("No se pudo cerrar la subasta, no hay ofertas válidas");
+                }
+
+                //Logica de cerrar la subasta
+                usuarioFinal.SaldoDisponible -= ObtenerPrecioTotalPublicacion();
+                Estado = Enums.EstadoPublicacion.CERRADA;
+                UsuarioFinal = usuarioFinal;
+                Cliente = usuarioFinal;
+                FechaCierre = DateTime.Now;
+
+        }
+
     }
 }
 

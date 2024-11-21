@@ -76,6 +76,9 @@ namespace WebObligatorioP2.Controllers
             try
             {
                 string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
+                //Cliente clienteActualizado = unSistema.ObtenerUsuarioPorEmail(emailUsuarioActual); // Logica para mostrar el SaldoDisponible
+                //HttpContext.Session.SetString("SaldoDisponible", clienteActualizado.SaldoDisponible.ToString());
+
                 unSistema.CargarSaldo(emailUsuarioActual, montoSaldo);
                 TempData["mensajeExito"] = "Su saldo fue incrementado correctamente";
                 return RedirectToAction("MiCuenta");

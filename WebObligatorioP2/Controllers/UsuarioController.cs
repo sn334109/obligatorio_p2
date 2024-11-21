@@ -26,9 +26,10 @@ namespace WebObligatorioP2.Controllers
                 //crear sesion
                 HttpContext.Session.SetString("Usuario", unUsuario.Email);
 
-                if (unUsuario is Cliente)
+                if (unUsuario is Cliente cliente)
                 {
                     HttpContext.Session.SetString("Rol", "Cliente");
+                    //HttpContext.Session.SetString("SaldoDisponible", cliente.SaldoDisponible.ToString()); // Logica para mostrar el SaldoDisponible
                 }
                 else if (unUsuario is Admin)
                 {
@@ -90,9 +91,10 @@ namespace WebObligatorioP2.Controllers
         [HttpPost]
         public IActionResult CerrarSubasta(int idSubasta) 
         {
+            string emailUsuarioActual = HttpContext.Session.GetString("Usuario");
             try
             {
-                unSistema.CerrarSubasta(idSubasta);
+                unSistema.CerrarSubasta(idSubasta, emailUsuarioActual);
                 TempData["mensajeExito"] = "Subasta finalizada con éxito";
                 return RedirectToAction("ListadoSubastas");
             }

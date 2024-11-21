@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Venta : Publicacion
     {
+        static Sistema unSistema = Sistema.Instancia;
         bool ofertaRelampago;
 
         public Venta() { }
@@ -56,5 +57,30 @@ namespace Dominio
         {
             return "Venta";
         }
+
+        public override void CerrarPublicacion(string emailUsuarioActual) 
+        {
+
+            Cliente usuarioActual = unSistema.ObtenerUsuarioPorEmail(emailUsuarioActual);
+
+            if (usuarioActual.SaldoDisponible >= ObtenerPrecioTotalPublicacion())
+            {
+                FechaCierre = DateTime.Now;
+                Cliente = usuarioActual;
+                UsuarioFinal = usuarioActual;
+
+                Estado = Enums.EstadoPublicacion.CERRADA;
+                usuarioActual.SaldoDisponible -= ObtenerPrecioTotalPublicacion();
+            }
+            else
+            {
+                throw new Exception("No dispone de saldo suficiente para realizar la compra");
+            }
+
+        }
+  
+
+
+
     }
 }
