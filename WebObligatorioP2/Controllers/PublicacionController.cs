@@ -25,8 +25,10 @@ namespace WebObligatorioP2.Controllers
                 Cliente cliente = unSistema.ObtenerUsuarioPorEmail(emailUsuarioActual); 
                 int clienteId = cliente.Id;
                 ViewBag.ClienteId = clienteId;
-
+                ViewBag.clienteObjetoParaSaldo = cliente;
                 return View(unSistema.ObtenerPublicaciones());
+
+               
             }
             catch (Exception unError)
             {

@@ -10,6 +10,12 @@ namespace WebObligatorioP2.Controllers
         {
             Usuario? unUsuario = unSistema.DevolverUsuario(email);
             ViewBag.Rol = HttpContext.Session.GetString("Rol");
+            
+            if (unUsuario is Cliente)
+            {
+                ViewBag.clienteObjetoParaSaldo = (Cliente)unUsuario;
+            }
+
             return View(unUsuario);
         }
 
@@ -29,7 +35,7 @@ namespace WebObligatorioP2.Controllers
                 if (unUsuario is Cliente cliente)
                 {
                     HttpContext.Session.SetString("Rol", "Cliente");
-                    //HttpContext.Session.SetString("SaldoDisponible", cliente.SaldoDisponible.ToString()); // Logica para mostrar el SaldoDisponible
+                   
                 }
                 else if (unUsuario is Admin)
                 {

@@ -2,3 +2,7 @@
 @model Usuario
 
 <h2 class="text-center">Bienvenido @Model.Nombre @Model.Apellido <span class="text-center text-info">(@ViewBag.Rol)</span></h2>
+@if(@Model is Cliente){
+
+<h3 class="text-center">Su saldo disponible al momento es: <span class="text-center text-decoration-underline text-success">$@ViewBag.clienteObjetoParaSaldo.SaldoDisponible</span></h3>
+}
