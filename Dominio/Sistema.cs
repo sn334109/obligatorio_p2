@@ -394,6 +394,18 @@ namespace Dominio
             throw new Exception("ObtenerUsuarioPorEmail() - no es un cliente");
         }
 
+        public Usuario ObtenerUsuarioPorEmailAdmin(string emailUsuarioActual)
+        {
+            foreach (Usuario unUsuario in listaDeUsuarios)
+            {
+                if (unUsuario.Email == emailUsuarioActual && unUsuario is Usuario admin)
+                {
+                    return admin;
+                }
+            }
+            throw new Exception("No existe Administrador");
+        }
+
 
         //Metodo agregado obligatorio 2
         //Logica de la oferta

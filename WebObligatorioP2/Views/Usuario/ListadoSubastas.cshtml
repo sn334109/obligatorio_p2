@@ -37,14 +37,19 @@
                 <td>
                     <form asp-controller="Usuario" asp-action="CerrarSubasta" method="post">
                         <input type="hidden" name="idSubasta" value="@unaSubasta.Id" />
-                        @if(unaSubasta.Estado != Enums.EstadoPublicacion.ABIERTA)
+
+                        @if (unaSubasta.Estado == Enums.EstadoPublicacion.ABIERTA)
+                        {
+                            <button class="btn-danger" type="submit">Cerrar subasta</button>
+                        }
+                        else if (unaSubasta.Estado == Enums.EstadoPublicacion.CERRADA)
                         {
                             <p class="text-danger">Subasta finalizada <span class="text-warning">(@unaSubasta?.Cliente?.Nombre @unaSubasta?.Cliente?.Apellido)</span> </p>
-
-                        } else
+                        }else
                         {
-                             <button class="btn-danger" type="submit">Cerrar subasta</button>
+                            <p class="text-danger">Subasta Cancelada </p>
                         }
+                        
                     </form>
                 </td>
 
